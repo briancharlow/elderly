@@ -22,3 +22,13 @@ async function createAppointment(req, res) {
         console.log(error)
     }
 }
+async function getAppointment(req, res) {
+    const caregiver = req.session.user;
+    try {
+        if (pool.connected) {
+
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
