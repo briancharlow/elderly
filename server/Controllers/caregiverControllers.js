@@ -22,7 +22,7 @@ async function createAppointment(req, res) {
         console.log(error)
     }
 }
-async function getAppointment(req, res) {
+async function getAppointments(req, res) {
     const caregiver = req.session.user;
     try {
         if (pool.connected) {
