@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const { Route } = require('./Routes/userRoutes');
+const { caregiverRoute } = require('./Routes/caregiverRoutes');
 require('dotenv').config();
 const dbConfig = require('./Config/dbconfig')
 const sql = require('mssql');
@@ -32,6 +33,7 @@ async function startApp() {
         }
     }))
     app.use(Route);
+    app.use(caregiverRoute);
 
 
 
