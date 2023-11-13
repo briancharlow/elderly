@@ -43,10 +43,12 @@ async function deleteAccount(req, res) {
     }
 }
 async function getCaregivers(req, res) {
+    const pool = req.pool;
 
     try {
         if (pool.connected) {
             let results = await pool.request().execute('GetAllCaregivers');
+
             console.log(results)
             const caregivers = results.recordsets[0];
             res.status(200).json({
@@ -66,6 +68,36 @@ async function getCaregivers(req, res) {
         console.log(error)
     }
 }
+async function getCaregiver(req, res) {
+    const { pool } = req;
+    const { id } = req.params;
+    try {
+        if (pool.connected) {
+            let results = await pool.request()
+                .input('caregiverId', id)
+                .execute("GetCaregiverById");
+            console.log(results)
+            const caregiver = results.recordsets[0];
 
+            if (caregiver.length === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: "caregiver not found",
+                })
+            }
+            else {
 
-module.exports = { getCaregivers, getAppointments, createAppointment, updateProfile, deleteAccount }
+                res.status(200).json({
+                    success: true,
+                    message: "caregiver retrieved successfully",
+                    caregiver: caregiver
+
+                })
+            }
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = { getCaregivers, getAppointments, createAppointment, updateProfile, deleteAccount, getCaregiver }

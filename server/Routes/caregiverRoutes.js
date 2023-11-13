@@ -1,4 +1,4 @@
-const express = require
+const express = require('express');
 const caregiverRoute = express.Router();
 
 const { getCaregivers, updateProfile, getAppointments, createAppointment, deleteAccount } = require('../Controllers/caregiverControllers');
