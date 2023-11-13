@@ -32,6 +32,16 @@ async function getAppointments(req, res) {
         console.log(error)
     }
 }
+async function deleteAccount(req, res) {
+    const { id } = req.session.user;
+    try {
+        if (pool.connected) {
+
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 async function getCaregivers(req, res) {
 
     try {
@@ -57,4 +67,5 @@ async function getCaregivers(req, res) {
     }
 }
 
-module.exports = { getCaregivers, getAppointments, createAppointment, updateProfile }
+
+module.exports = { getCaregivers, getAppointments, createAppointment, updateProfile, deleteAccount }
