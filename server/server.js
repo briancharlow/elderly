@@ -7,6 +7,7 @@ const dbConfig = require('./Config/dbconfig')
 const sql = require('mssql');
 const session = require('express-session')
 const { v4 } = require('uuid');
+const { clientRoute } = require('./Routes/clientRoutes');
 
 
 app.use(express.json());
@@ -34,7 +35,7 @@ async function startApp() {
     }))
     app.use(Route);
     app.use(caregiverRoute);
-
+    app.use(clientRoute);
 
 
 
