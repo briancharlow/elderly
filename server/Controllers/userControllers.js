@@ -108,10 +108,7 @@ async function loginUser(req, res) {
                         console.log(req.session)
 
                         req.session.authorized = true;
-                        req.session.user = user;
-
-
-
+                        req.session.user = user
 
 
                         res.status(200).json({
