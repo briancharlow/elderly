@@ -194,6 +194,10 @@ async function loginUser(req, res) {
                                 cookies: token,
                             });
 
+                        console.log('foo')
+                        console.log(req.cookies)
+                        console.log('bar')
+
                     }
                     else {
                         res.status(201).json({
@@ -220,7 +224,7 @@ async function logoutUser(req, res) {
     try {
         res.clearCookie("accesstoken");
         res.clearCookie("refreshtoken");
-        res.status(200).json({
+        res.json({
             message: "Logout successful",
         });
     } catch (error) {
