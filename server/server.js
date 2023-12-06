@@ -6,7 +6,7 @@ const { clientRoute } = require('./Routes/clientRoutes')
 require('dotenv').config();
 const dbConfig = require('./Config/dbconfig')
 const sql = require('mssql');
-
+const cookieParser = require('cookie-parser');
 
 app.use(express.json());
 async function startApp() {
@@ -21,7 +21,7 @@ async function startApp() {
         req.pool = pool;
         next();
     })
-
+    app.use(cookieParser)
     app.use(Route);
     app.use(caregiverRoute);
     app.use(clientRoute);

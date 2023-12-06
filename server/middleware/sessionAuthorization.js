@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 // const sessionAuthorization = (req, res, next) => {
 //     console.log(req.cookies);
@@ -45,9 +45,40 @@ const jwt = require("jsonwebtoken");
 //     }
 // };
 
+const jwt = require('jsonwebtoken');
+
 const sessionAuthorization = (req, res, next) => {
-    console.log('ujifdjcfd')
-    next()
-}
+    // Get the access token from the request cookies
+    console.log(req.cookies);
+    const accessToken = req.cookies.accesstoken;
+    console.log(accessToken)
+    // Check if the access token exists
+    if (!accessToken) {
+        return res.status(401).json({
+            success: false,
+            message: 'Unauthorized: Access token missing',
+        });
+    }
+
+    try {
+        // Verify the access token
+        const user_payload = jwt.verify(accessToken, process.env.SECRET);
+
+        // Attach the user payload to the request for further use in route handlers
+        req.user = user_payload;
+
+        // Continue to the next middleware or route handler
+        next();
+    } catch (error) {
+        return res.status(401).json({
+            success: false,
+            message: 'Unauthorized: Invalid access token',
+        });
+    }
+};
+
+
+
+
 
 module.exports = { sessionAuthorization };
