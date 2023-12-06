@@ -6,8 +6,9 @@ const { getCaregivers, updateProfile, getAppointments, createAppointment, delete
 const { sessionAuthorization } = require('../middleware/sessionAuthorization');
 
 
+caregiverRoute.get('/getcaregivers', sessionAuthorization, getCaregivers);
 caregiverRoute.use(sessionAuthorization);
-caregiverRoute.get('/getcaregivers', getCaregivers);
+
 caregiverRoute.get('/getappointments', getAppointments);
 caregiverRoute.post('/createappointment', createAppointment);
 caregiverRoute.put('/updateprofile', updateProfile);

@@ -19,7 +19,7 @@ async function registerUser(req, res) {
                 .input("emergency_contact", user.phone)
                 .execute("CreateNewUser");
 
-            console.log(result.recordset)
+
 
             if (result.recordset && result.recordset.length > 0 && result.recordset[0].success === 1) {
                 res.status(200).send("User registered successfully!");
@@ -49,7 +49,6 @@ async function createCaregiver(req, res) {
                 .input("password", hashedPassword)
                 .execute("sp_CreateCaregiver");
 
-            console.log(result);
 
             // Check the number of rows affected to determine success
             if (result.rowsAffected && result.rowsAffected[0] > 0) {
@@ -102,7 +101,7 @@ async function loginUser(req, res) {
             } else {
                 if (result.rowsAffected[0] === 1) {
                     const user = result.recordsets[0][0];
-                    console.log(user)
+
                     let passwords_match = await bcrypt.compare(pwd, user.password);
                     if (passwords_match) {
                         const user_payload = {
@@ -116,7 +115,7 @@ async function loginUser(req, res) {
                             }
 
                         );
-                        console.log(token)
+
                         const refresh_token = jwt.sign(
                             user_payload,
                             process.env.REFRESH_TOKEN_SECRET,
@@ -124,7 +123,7 @@ async function loginUser(req, res) {
                                 expiresIn: '7d',
                             }
                         )
-                        console.log(refresh_token)
+
 
                         res
                             .cookie("refreshtoken", refresh_token, {
@@ -160,13 +159,13 @@ async function loginUser(req, res) {
                             role: 'caregiver',
                         };
                         const token = jwt.sign(
-                            user_payload, process.env.SECRET,
+                            user_payload, process.env.ACCESS_TOKEN_SECRET,
                             {
                                 expiresIn: "1d",
                             }
 
                         );
-                        console.log(token)
+
                         const refresh_token = jwt.sign(
                             user_payload,
                             process.env.REFRESH_TOKEN_SECRET,
@@ -174,7 +173,7 @@ async function loginUser(req, res) {
                                 expiresIn: '7d',
                             }
                         )
-                        console.log(refresh_token)
+
 
                         res
                             .cookie("refreshtoken", refresh_token, {
@@ -193,11 +192,6 @@ async function loginUser(req, res) {
                                 message: "Login successful",
                                 cookies: token,
                             });
-
-                        console.log('foo')
-                        console.log(req.cookies)
-                        console.log('bar')
-
                     }
                     else {
                         res.status(201).json({

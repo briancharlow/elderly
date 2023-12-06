@@ -27,17 +27,17 @@ async function startApp() {
     app.use(clientRoute);
 
 
-    app.use("*", (req, res, next) => {
-        const error = new Error("Route Not found");
-        next({
-            status: 404,
-            message: error.message,
-        });
+    // app.use("*", (req, res, next) => {
+    //     const error = new Error("Route Not found");
+    //     next({
+    //         status: 404,
+    //         message: error.message,
+    //     });
 
-    });
-    app.use((error, req, res, next) => {
-        res.status(error.status).json(error.message);
-    });
+    // });
+    // app.use((error, req, res, next) => {
+    //     res.status(error.status).json(error.message);
+    // });
 
 
 
