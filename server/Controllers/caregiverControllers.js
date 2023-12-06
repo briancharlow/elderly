@@ -49,7 +49,7 @@ async function getCaregivers(req, res) {
         if (pool.connected) {
             let results = await pool.request().execute('GetAllCaregivers');
 
-            console.log(results)
+
             const caregivers = results.recordsets[0];
             res.status(200).json({
                 success: true,
@@ -76,7 +76,7 @@ async function getCaregiver(req, res) {
             let results = await pool.request()
                 .input('caregiverId', id)
                 .execute("GetCaregiverById");
-            console.log(results)
+
             const caregiver = results.recordsets[0];
 
             if (caregiver.length === 0) {
