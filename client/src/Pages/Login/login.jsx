@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import "./style.css"; // Import your CSS file
+import "./login.css"; // Import your CSS file
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGooglePlusG,
+  faFacebookF,
+  faGithub,
+  faLinkedinIn,
+} from "@fortawesome/free-brands-svg-icons";
 
 const LoginForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -15,16 +22,16 @@ const LoginForm = () => {
           <h1>Create Account</h1>
           <div className="social-icons">
             <a href="#" className="icon">
-              <i className="fa-brands fa-google-plus-g"></i>
+              <FontAwesomeIcon icon={faGooglePlusG} />
             </a>
             <a href="#" className="icon">
-              <i className="fa-brands fa-facebook-f"></i>
+              <FontAwesomeIcon icon={faFacebookF} />
             </a>
             <a href="#" className="icon">
-              <i className="fa-brands fa-github"></i>
+              <FontAwesomeIcon icon={faGithub} />
             </a>
             <a href="#" className="icon">
-              <i className="fa-brands fa-linkedin-in"></i>
+              <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
           </div>
           <span>or use your email for registration</span>
@@ -39,16 +46,16 @@ const LoginForm = () => {
           <h1>Sign In</h1>
           <div className="social-icons">
             <a href="#" className="icon">
-              <i className="fa-brands fa-google-plus-g"></i>
+              <FontAwesomeIcon icon={faGooglePlusG} />
             </a>
             <a href="#" className="icon">
-              <i className="fa-brands fa-facebook-f"></i>
+              <FontAwesomeIcon icon={faFacebookF} />
             </a>
             <a href="#" className="icon">
-              <i className="fa-brands fa-github"></i>
+              <FontAwesomeIcon icon={faGithub} />
             </a>
             <a href="#" className="icon">
-              <i className="fa-brands fa-linkedin-in"></i>
+              <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
           </div>
           <span>or use your email password</span>
