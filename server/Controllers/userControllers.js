@@ -194,7 +194,7 @@ async function loginUser(req, res) {
                             });
                     }
                     else {
-                        res.status(201).json({
+                        res.status(401).json({
                             success: false,
                             message: "check credentials and try again"
                         })
