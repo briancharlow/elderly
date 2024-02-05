@@ -1,0 +1,39 @@
+/* home.css
+.home {
+  display: flex;
+  flex-direction: column;
+}
+*/
+.content-container {
+  display: flex;
+  overflow: hidden;
+  /* justify-content: space-between; */
+
+
+}
+
+.leftbar {
+  width: fit-content;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 0;
+  transition: width 0.7s;
+  top: 60px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+} 
+.home{
+  width:100vw;
+  height: 100vh;
+}
+.content-container{
+  position: relative;
+}
+.rightbar{
+  position: absolute;
+  right: 0;
+  top: 0;
+}

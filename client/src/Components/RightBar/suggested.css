@@ -1,0 +1,89 @@
+/* suggested.css */
+:root {
+  --maincolor: #5767aa;
+  --secondarycolor: #db2b39;
+  --textcolor: #eee;
+
+  --primary: #007fff;
+  --secondary: #6f7e8c;
+  --box: #f5f5f5;
+  --text: #212121;
+}
+.suggested-users {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.users-list {
+  width: 100%;
+}
+
+.user-item {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+h3 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.follow-button {
+  margin-left: auto;
+}
+
+.follow-button button {
+  text-transform: uppercase;
+}
+.user-info button {
+  background-color: var(--primary);
+  color: #fff;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .user-item img {
+    width: 40px;
+    height: 40px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+}
