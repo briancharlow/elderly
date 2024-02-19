@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useNavigate } from 'react-router-dom'
 
 const CaregiverSignUpForm = ({ onSignUp }) => {
   const [phone, setPhone] = useState("");
@@ -15,6 +16,10 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
   const location = useLocation();
   const user = location.state.user;
 
+  console.log('this is the user:',user)
+
+  const navigate = useNavigate();
+
   const caregiver = { ...user, phone, description, password, certificationId };
 
   const handleSubmit = async () => {
@@ -23,11 +28,20 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
         "http://localhost:5000/createcaregiver",
         caregiver
       );
-      setShowAlert(true);
-      setAlertMessage("Sign up successful");
+    console.log(response);
+     const data = response.data;
+     console.log(data);
+
+     if(data.success){
+      alert("signup succesfull")
+      navigate("/login");
+     }
+     else{
+      alert("signup failed, check credentials and try again")
+     }
+
     } catch (error) {
-      setShowAlert(true);
-      setAlertMessage(`Sign up failed: ${error}`);
+      console.log(error)
     }
   };
 
