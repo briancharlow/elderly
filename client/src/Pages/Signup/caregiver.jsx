@@ -22,6 +22,8 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
 
   const caregiver = { ...user, phone, description, password, certificationId };
 
+  console.log(caregiver)
+
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
