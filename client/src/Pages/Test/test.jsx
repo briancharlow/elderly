@@ -1,7 +1,7 @@
 // App.js
 
 import React, { useState } from "react";
-import "./App.css"; // Import your CSS file
+import "./test.css"; // Import your CSS file
 
 const Test = () => {
   const [isSignUp, setIsSignUp] = useState(false);
