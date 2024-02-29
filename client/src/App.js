@@ -6,6 +6,7 @@ import CaregiversList from "./Components/CenterOutlet/centeroutlet";
 import Home from "./Pages/Home/home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Test from "./Pages/Test/test"
 
 
 
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Test />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/caregiver" element={<CaregiverSignUpForm />} />
         <Route path="/guardian" element={<GuardianSignUpForm />} />
