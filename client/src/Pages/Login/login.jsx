@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-import CaregiverSignUpForm from "../Signup/caregiver";
+
 import axios from "axios"; // Import Axios
 
 const LoginForm = () => {
@@ -35,19 +35,21 @@ const LoginForm = () => {
   const handleGuardianSignUp = async (e) => {
     navigate("/guardian");
   };
-  
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        email,
-        pwd: password,
-      },
-      {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        {
+          email,
+          pwd: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       console.log("foo");
       console.log(response);
       console.log("bar");
