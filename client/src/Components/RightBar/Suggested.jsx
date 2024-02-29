@@ -16,13 +16,16 @@ const Suggested = () => {
 
   const fetchSuggestions = async () => {
     try {
-      const response = await axios.get("http://localhost:5010/suggestions", {
+      const response = await axios.get("http://localhost:5000/getcaregivers", {
         withCredentials: true,
       });
       const data = response.data;
+      console.log(data);
+
+      const caregivers = data.caregivers;
 
       if (data.success) {
-        setSuggestions(data.suggestions);
+        setSuggestions(caregivers);
       } else {
         console.log("Failed to fetch suggestions:", data.message);
       }
@@ -30,31 +33,6 @@ const Suggested = () => {
       console.log("Error while fetching suggestions:", error);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleFollow = async (userId) => {
-    // Filter out the user with the given userId from the suggestions list
-    const updatedSuggestions = suggestions.filter((user) => user.id !== userId);
-    setSuggestions(updatedSuggestions);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5010/followUser",
-        {
-          followingId: userId,
-        },
-        { withCredentials: true }
-      );
-      console.log(response);
-
-      if (response.data.success) {
-        toast.success("Successfully followed user.");
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      toast.error("Failed to follow user. Please try again.");
     }
   };
 
@@ -67,23 +45,15 @@ const Suggested = () => {
         </div>
       ) : suggestions.length > 0 ? (
         <div className="users-list">
-          {suggestions.map((user) => (
-            <div className="user-item" key={user.id}>
-              {user.profile_picture ? (
-                <Avatar src={user.profile_picture} alt="Profile" />
+          {suggestions.map((caregiver) => (
+            <div className="user-item" key={caregiver.id}>
+              {caregiver.profile_picture ? (
+                <Avatar src={caregiver.profile_picture} alt="Profile" />
               ) : (
-                <Avatar>{user.username[0].toUpperCase()}</Avatar>
+                <Avatar>{caregiver.fullname[0].toUpperCase()}</Avatar>
               )}
               <div className="user-info">
-                <h3>{user.username}</h3>
-                <Button
-                  variant="contained"
-                  size="small"
-                  className="follow-btn"
-                  onClick={() => handleFollow(user.id)}
-                >
-                  Follow
-                </Button>
+                <h3>{caregiver.fullname}</h3>
               </div>
             </div>
           ))}
