@@ -19,13 +19,13 @@ const UserProfile = () => {
     fetchUserProfileFromAPI();
   }, []);
 
-  // const handleProfileClick = () => {
-  //   if (profile) {
-  //     navigate(`/home/profilePage/${profile.user_id}`);
-  //   } else {
-  //     toast.error("Failed to fetch user profile. Please try again.");
-  //   }
-  // };
+  const handleProfileClick = () => {
+    if (profile) {
+      navigate(`/home/profilePage/${profile.user_id}`);
+    } else {
+      toast.error("Failed to fetch user profile. Please try again.");
+    }
+  };
 
   const fetchUserProfileFromAPI = async () => {
     try {
