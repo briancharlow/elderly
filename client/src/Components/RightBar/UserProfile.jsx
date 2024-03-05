@@ -29,7 +29,7 @@ const UserProfile = () => {
 
   const fetchUserProfileFromAPI = async () => {
     try {
-      const response = await axios.get("http://localhost:5010/Profile", {
+      const response = await axios.get("http://localhost:5000/user", {
         withCredentials: true,
       }); // Replace with the actual API endpoint
       const data = response.data;
