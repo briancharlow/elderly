@@ -9,9 +9,12 @@ const CaregiversList = () => {
   useEffect(() => {
     const fetchCaregivers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/getcaregivers", {
-          withCredentials: true, // Include credentials in the request
-        });
+        const response = await axios.get(
+          "http://localhost:5000/getcaregivers",
+          {
+            withCredentials: true, // Include credentials in the request
+          }
+        );
         const data = response.data;
 
         if (data.success) {
@@ -39,7 +42,8 @@ const CaregiversList = () => {
           {caregivers.map((caregiver) => (
             <li key={caregiver.id}>
               {/* Display caregiver information here */}
-              <strong>Name:</strong> {caregiver.name} {/* Replace with actual property */}
+              <strong>Name:</strong> {caregiver.fullname}{" "}
+              {/* Replace with actual property */}
               {/* Add more caregiver details as needed */}
             </li>
           ))}
