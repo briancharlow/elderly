@@ -33,9 +33,10 @@ const UserProfile = () => {
         withCredentials: true,
       }); // Replace with the actual API endpoint
       const data = response.data;
+      console.log("profile:", data);
 
       if (data.success) {
-        setProfile(data.profile);
+        setProfile(data.user);
       } else {
         console.log("Failed to fetch user profile:", data.message);
         toast.error("Failed to fetch user profile. Please try again.");
@@ -66,7 +67,7 @@ const UserProfile = () => {
               {profile.profile_picture ? (
                 <Avatar src={profile.profile_picture} alt="Profile" />
               ) : (
-                <Avatar> {profile.username[0].toUpperCase()} </Avatar>
+                <Avatar> {profile.fullname[0].toUpperCase()} </Avatar>
               )}
               <div className="follow-count">
                 <span>
@@ -88,7 +89,7 @@ const UserProfile = () => {
               <div className="bio-data">
                 {/* Use the pen/quill icon */}
                 <p className="bio-bio">
-                  <AiOutlineEdit className="bio-icon" /> {profile.bio}
+                  <AiOutlineEdit className="bio-icon" /> {profile.description}
                 </p>
                 <p className="bio-location">
                   <FaMapMarkerAlt className="location-icon" />
