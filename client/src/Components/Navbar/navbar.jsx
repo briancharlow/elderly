@@ -33,17 +33,18 @@ const Navbar = ({ onToggleLeftBar }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/searchcaregiver/${term}`, // Endpoint updated to match the new port and route
+        `http://localhost:5000/searchcaregiver/${term}`,
         {
           withCredentials: true,
         }
       );
-      console.log(response)
+      console.log(response);
       // Assuming the backend response includes a "caregivers" field
-      setSearchResults(response.data.caregivers); 
+      setSearchResults(response.data.caregivers);
     } catch (error) {
       console.error(error);
-      // toast.error("Error while searching for caregivers.");
+    
+      alert("Error while searching for caregivers.");
     } finally {
       setLoading(false);
     }
@@ -84,7 +85,7 @@ const Navbar = ({ onToggleLeftBar }) => {
           />
         </div>
       )}
-      {/* {searchResults.length > 0 && (
+      {searchResults.length > 0 && (
         <div className="search-results-container">
           <SearchResults
             searchTerm={searchTerm}
@@ -92,7 +93,7 @@ const Navbar = ({ onToggleLeftBar }) => {
             setSearchResults={setSearchResults}
           />
         </div>
-      )} */}
+      )}
     </div>
   );
 };

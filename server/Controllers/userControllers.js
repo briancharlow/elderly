@@ -117,15 +117,13 @@ async function loginUser(req, res) {
     try {
         const { pool } = req;
         if (pool.connected) {
-            const result = await pool.request().input('email', email).execute('Test')
-            //kwanza =>user pili=>caregiver
+            const result = await pool.request().input('email', email).execute('Test');
 
             if (result.rowsAffected[0] === 0 && result.rowsAffected[1] === 0) {
                 res.status(404).json({
                     success: false,
                     message: "No user found",
-                }
-                );
+                });
             } else {
                 if (result.rowsAffected[0] === 1) {
                     const user = result.recordsets[0][0];
@@ -137,11 +135,11 @@ async function loginUser(req, res) {
                             role: 'guardian',
                         };
                         const token = jwt.sign(
-                            user_payload, process.env.ACCESS_TOKEN_SECRET,
+                            user_payload,
+                            process.env.ACCESS_TOKEN_SECRET,
                             {
                                 expiresIn: "1d",
                             }
-
                         );
 
                         const refresh_token = jwt.sign(
@@ -150,16 +148,15 @@ async function loginUser(req, res) {
                             {
                                 expiresIn: '7d',
                             }
-                        )
-
+                        );
 
                         res
-                            .cookie("refreshtoken", refresh_token, {
+                            .cookie("refreshToken", refresh_token, {
                                 httpOnly: true,
                                 sameSite: "none",
                                 secure: false,
                             })
-                            .cookie("accesstoken", token, {
+                            .cookie("accessToken", token, {
                                 httpOnly: true,
                                 sameSite: "none",
                                 secure: false,
@@ -170,15 +167,13 @@ async function loginUser(req, res) {
                                 message: "Login successful",
                                 cookies: token,
                             });
-                    }
-                    else {
+                    } else {
                         res.status(401).json({
                             success: false,
-                            message: "login failed, check password and try again"
-                        })
+                            message: "Login failed, check password and try again"
+                        });
                     }
                 } else if (result.rowsAffected[1] === 1) {
-                    // user
                     const user = result.recordsets[1][0];
                     let passwords_match = await bcrypt.compare(pwd, user.password);
                     if (passwords_match) {
@@ -187,11 +182,11 @@ async function loginUser(req, res) {
                             role: 'caregiver',
                         };
                         const token = jwt.sign(
-                            user_payload, process.env.ACCESS_TOKEN_SECRET,
+                            user_payload,
+                            process.env.ACCESS_TOKEN_SECRET,
                             {
                                 expiresIn: "1d",
                             }
-
                         );
 
                         const refresh_token = jwt.sign(
@@ -200,16 +195,15 @@ async function loginUser(req, res) {
                             {
                                 expiresIn: '7d',
                             }
-                        )
-
+                        );
 
                         res
-                            .cookie("refreshtoken", refresh_token, {
+                            .cookie("refreshToken", refresh_token, {
                                 httpOnly: true,
                                 sameSite: "none",
                                 secure: false,
                             })
-                            .cookie("accesstoken", token, {
+                            .cookie("accessToken", token, {
                                 httpOnly: true,
                                 sameSite: "none",
                                 secure: false,
@@ -220,29 +214,24 @@ async function loginUser(req, res) {
                                 message: "Login successful",
                                 cookies: token,
                             });
-                    }
-                    else {
+                    } else {
                         res.status(401).json({
                             success: false,
-                            message: "check credentials and try again"
-                        })
+                            message: "Check credentials and try again"
+                        });
                     }
-
-
                 }
             }
-
         }
-    }
-
-    catch (error) {
-        console.log(error)
+    } catch (error) {
+        console.log(error);
         res.status(500).json({
             success: false,
             message: "Database connection error",
         });
     }
 }
+
 
 async function logoutUser(req, res) {
     try {
