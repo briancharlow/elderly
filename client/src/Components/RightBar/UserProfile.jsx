@@ -70,18 +70,18 @@ const UserProfile = () => {
                 <Avatar> {profile.fullname[0].toUpperCase()} </Avatar>
               )}
               <div className="follow-count">
-                <span>
+                {/* <span>
                   <FaUsers className="follow-icon" /> Followers:{" "}
                   {profile.followers_count}
                 </span>
                 <span>
                   <FaUsers className="follow-icon" /> Following:{" "}
                   {profile.following_count}
-                </span>
-                <span>
+                </span> */}
+                {/* <span>
                   <FaStickyNote className="follow-icon" /> Posts:{" "}
-                  {profile.posts.length}
-                </span>
+                  {profile.location}
+                </span> */}
               </div>
             </div>
             <div className="bio">
