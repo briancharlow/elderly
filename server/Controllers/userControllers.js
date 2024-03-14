@@ -136,7 +136,7 @@ async function loginUser(req, res) {
                         res.status(200).json({
                             success: true,
                             message: "Login successful",
-                            role: user
+                            role: "guardian"
                         })
 
                     }
@@ -156,7 +156,7 @@ async function loginUser(req, res) {
                         res.status(200).json({
                             success: true,
                             message: "Login successful",
-                            role: caregiver
+                            role: "caregiver"
                         })
                     } else {
                         res.status(401).json({
@@ -177,7 +177,8 @@ async function loginUser(req, res) {
 }
 
 async function logoutUser(req, res) {
-    console.log(req.session)
+    // console.log(req.session)
+    console.log(req.session.user)
 
 
     req.session.destroy((err) => {

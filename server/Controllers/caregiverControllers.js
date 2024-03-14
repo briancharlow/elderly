@@ -13,7 +13,7 @@ async function updateProfile(req, res) {
 }
 async function approveAppointment(req, res) {
     const { pool } = req;
-    const caregiverId = req.user.id;
+    const caregiverId = req.session.user.id;
     const { appointmentId } = req.params;
 
     try {
@@ -47,7 +47,7 @@ async function approveAppointment(req, res) {
 }
 async function getAppointments(req, res) {
     const { pool } = req;
-    const caregiverId = req.user.id;
+    const caregiverId = req.session.user.id;
     try {
         if (pool.connected) {
             let results = await pool.request()
@@ -75,7 +75,7 @@ async function getAppointments(req, res) {
     }
 }
 async function deleteAccount(req, res) {
-    const { id } = req.session.user;
+    const { id } = req.session.user.id;
     try {
         if (pool.connected) {
 
