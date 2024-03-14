@@ -35,7 +35,7 @@ async function startApp() {
 
 
     app.use(session({
-        secret: 'secret-key',
+        secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
     }));
