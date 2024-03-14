@@ -130,90 +130,34 @@ async function loginUser(req, res) {
 
                     let passwords_match = await bcrypt.compare(pwd, user.password);
                     if (passwords_match) {
-                        const user_payload = {
-                            id: user.id,
-                            role: 'guardian',
-                        };
-                        const token = jwt.sign(
-                            user_payload,
-                            process.env.ACCESS_TOKEN_SECRET,
-                            {
-                                expiresIn: "1d",
-                            }
-                        );
+                        req.session.authorized = true;
+                        req.session.user = user;
 
-                        const refresh_token = jwt.sign(
-                            user_payload,
-                            process.env.REFRESH_TOKEN_SECRET,
-                            {
-                                expiresIn: '7d',
-                            }
-                        );
+                        res.status(200).json({
+                            success: true,
+                            message: "Login successful",
+                            role: user
+                        })
 
-                        res
-                            .cookie("refreshToken", refresh_token, {
-                                httpOnly: true,
-                                sameSite: "none",
-                                secure: false,
-                            })
-                            .cookie("accessToken", token, {
-                                httpOnly: true,
-                                sameSite: "none",
-                                secure: false,
-                            })
-                            .status(200)
-                            .json({
-                                success: true,
-                                message: "Login successful",
-                                cookies: token,
-                            });
-                    } else {
+                    }
+                    else {
                         res.status(401).json({
                             success: false,
-                            message: "Login failed, check password and try again"
+                            message: "Check credentials and try again"
                         });
                     }
                 } else if (result.rowsAffected[1] === 1) {
                     const user = result.recordsets[1][0];
                     let passwords_match = await bcrypt.compare(pwd, user.password);
                     if (passwords_match) {
-                        const user_payload = {
-                            id: user.id,
-                            role: 'caregiver',
-                        };
-                        const token = jwt.sign(
-                            user_payload,
-                            process.env.ACCESS_TOKEN_SECRET,
-                            {
-                                expiresIn: "1d",
-                            }
-                        );
+                        req.session.authorized = true;
+                        req.session.user = user;
 
-                        const refresh_token = jwt.sign(
-                            user_payload,
-                            process.env.REFRESH_TOKEN_SECRET,
-                            {
-                                expiresIn: '7d',
-                            }
-                        );
-
-                        res
-                            .cookie("refreshToken", refresh_token, {
-                                httpOnly: true,
-                                sameSite: "none",
-                                secure: false,
-                            })
-                            .cookie("accessToken", token, {
-                                httpOnly: true,
-                                sameSite: "none",
-                                secure: false,
-                            })
-                            .status(200)
-                            .json({
-                                success: true,
-                                message: "Login successful",
-                                cookies: token,
-                            });
+                        res.status(200).json({
+                            success: true,
+                            message: "Login successful",
+                            role: caregiver
+                        })
                     } else {
                         res.status(401).json({
                             success: false,
@@ -232,17 +176,18 @@ async function loginUser(req, res) {
     }
 }
 
-
 async function logoutUser(req, res) {
-    try {
-        res.clearCookie("accesstoken");
-        res.clearCookie("refreshtoken");
-        res.json({
-            message: "Logout successful",
-        });
-    } catch (error) {
-        console.log(error);
-    }
+    console.log(req.session)
+
+
+    req.session.destroy((err) => {
+        if (err) {
+            res.send("Error logging out");
+        } else {
+            res.send("Logged out successfully");
+        }
+    })
+
 }
 async function getCaregivers(req, res) {
     const pool = req.pool;
