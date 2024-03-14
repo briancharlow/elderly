@@ -12,6 +12,7 @@ const sessionAuthorization = (req, res, next) => {
         });
     }
 
+
     try {
         // check if access token is valid
         const decoded = jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET);
