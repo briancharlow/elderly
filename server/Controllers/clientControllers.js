@@ -43,7 +43,7 @@ async function requestAppointment(req, res) {
     const { pool } = req;
 
     const { caregiverId, date, startTime, endTime } = req.body;
-    const clientId = req.user.id;
+    const clientId = req.session.user.id;
 
 
     try {
@@ -86,7 +86,7 @@ async function rateCaregivers(req, res) {
     const { pool } = req;
 
     const { rating, comment } = req.body;
-    const clientId = req.user.id;
+    const clientId = req.session.user.id;
     const { caregiverId } = req.params;
 
     console.log(caregiverId)
