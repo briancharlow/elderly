@@ -8,8 +8,11 @@ const dbConfig = require('./Config/dbconfig')
 const sql = require('mssql');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const session = require('express-session')
 
-app.use(cookieParser());
+
+
+// app.use(cookieParser());
 app.use(express.json());
 
 const corsOptions = {
@@ -29,6 +32,13 @@ async function startApp() {
         req.pool = pool;
         next();
     })
+
+
+    app.use(session({
+        secret: 'secret-key',
+        resave: false,
+        saveUninitialized: false,
+    }));
 
     app.use(Route);
     app.use(caregiverRoute);
