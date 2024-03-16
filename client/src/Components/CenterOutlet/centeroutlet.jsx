@@ -1,6 +1,7 @@
 // CaregiversList.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Avatar } from "@material-ui/core";
 
 const CaregiversList = () => {
   const [caregivers, setCaregivers] = useState([]);
@@ -40,12 +41,24 @@ const CaregiversList = () => {
       ) : (
         <ul>
           {caregivers.map((caregiver) => (
-            <li key={caregiver.id}>
-              {/* Display caregiver information here */}
-              <strong>Name:</strong> {caregiver.fullname}{" "}
-              {/* Replace with actual property */}
-              {/* Add more caregiver details as needed */}
-            </li>
+            <div className="caregiver" key={caregiver.id}>
+              <div className="profile">
+                <Avatar> {caregiver.fullname[0].toUpperCase()} </Avatar>
+                <div className="caregiver-details">
+                  <h3>{caregiver.fullname}</h3>
+                  <p>{caregiver.location}</p>
+                </div>
+              </div>
+              <div>
+                <strong>{caregiver.qualification}</strong>
+                <p>{caregiver.description}</p>
+              </div>
+              <hr />
+              <div className="caregiver-actions">
+                <span>Rating: {caregiver.rating}</span>
+                <button>View more</button>
+              </div>
+            </div>
           ))}
         </ul>
       )}

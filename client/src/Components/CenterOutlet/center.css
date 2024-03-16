@@ -1,0 +1,49 @@
+.caregivers-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0;
+  list-style: none;
+  background-color: #f5f5f5;
+}
+.caregiver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.caregiver-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.caregiver-details h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000000;
+}
+.caregiver-details p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #1028c6;
+}
