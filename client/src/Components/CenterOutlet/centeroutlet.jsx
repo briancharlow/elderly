@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Avatar } from "@material-ui/core";
+import "./center.css";
 
 const CaregiversList = () => {
   const [caregivers, setCaregivers] = useState([]);
