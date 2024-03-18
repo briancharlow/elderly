@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../../Components/Navbar/navbar"
+import Navbar from "../../Components/Navbar/navbar";
 import LeftBar from "../../Components/LeftBar/Leftbar";
-
-import RightBar from "../../Components/RightBar/Rightbar";
+// import RightBar from "../../Components/RightBar/Rightbar";
 import { Outlet } from "react-router-dom";
 import "./home.css";
 //import outlet from react
@@ -20,7 +19,7 @@ const Home = () => {
       <div className="content-container">
         <LeftBar isOpen={isLeftBarOpen} onClose={toggleLeftBar} />
         <Outlet />
-        <RightBar />
+        {/* <RightBar /> */}
       </div>
     </div>
   );
