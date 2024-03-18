@@ -3,39 +3,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
+  margin-top: 3rem;
+  width: 90%;
   height: 100%;
   overflow: auto;
   padding: 0;
   list-style: none;
-  background-color: #f5f5f5;
 }
 .caregiver {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  width: 100%;
+  width: 60rem;
   height: 100%;
   overflow: auto;
   padding: 1rem;
   background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .profile {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 1rem;
   width: 100%;
 }
 .caregiver-details {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem;
+  margin-left: 2rem;
 }
 .caregiver-details h3 {
   font-size: 1.5rem;
@@ -46,4 +41,30 @@
   font-size: 1rem;
   font-weight: 400;
   color: #1028c6;
+}
+.qualifications {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.caregiver-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.caregiver-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #512da8;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.caregiver-actions button:hover {
+  background-color: #5c6bc0;
 }

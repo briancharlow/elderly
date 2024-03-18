@@ -18,7 +18,7 @@ const CaregiversList = () => {
           }
         );
         const data = response.data;
-
+        console.log(data.caregivers);
         if (data.success) {
           setCaregivers(data.caregivers);
         } else {
@@ -36,11 +36,10 @@ const CaregiversList = () => {
 
   return (
     <div className="caregivers-list">
-      <h2>Caregivers List</h2>
       {loading ? (
         <p>Loading caregivers...</p>
       ) : (
-        <ul>
+        <>
           {caregivers.map((caregiver) => (
             <div className="caregiver" key={caregiver.id}>
               <div className="profile">
@@ -50,18 +49,18 @@ const CaregiversList = () => {
                   <p>{caregiver.location}</p>
                 </div>
               </div>
-              <div>
-                <strong>{caregiver.qualification}</strong>
+              <div className="qualifications">
+                <strong>Specialization: {caregiver.qualifications}</strong>
                 <p>{caregiver.description}</p>
               </div>
               <hr />
               <div className="caregiver-actions">
-                <span>Rating: {caregiver.rating}</span>
+                <span>Rating: {caregiver.ratings}</span>
                 <button>View more</button>
               </div>
             </div>
           ))}
-        </ul>
+        </>
       )}
     </div>
   );
