@@ -9,7 +9,7 @@ const CaregiversList = () => {
   const navigate = useNavigate();
 
   const handleViewMore = (caregiverId) => {
-    navigate(`/caregiver/${caregiverId}`);
+    navigate(`/home/caregiver/${caregiverId}`);
   };
 
   const [caregivers, setCaregivers] = useState([]);

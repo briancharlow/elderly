@@ -6,6 +6,7 @@ import CaregiversList from "./Components/CenterOutlet/centeroutlet";
 import Home from "./Pages/Home/home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CaregiverDetails from "./Components/Caregiver/CaregiverDetails";
 
 
 
@@ -18,8 +19,9 @@ const App = () => {
         <Route path="/caregiver" element={<CaregiverSignUpForm />} />
         <Route path="/guardian" element={<GuardianSignUpForm />} />
         <Route path="/home" element={<Home />}>
-          {/* Render CenterOutlet by default */}
           <Route index element={<CaregiversList />} />
+          <Route path="/home/caregiver/:id" element={<CaregiverDetails />} />
+
           {/* <Route path="/home/notifications" element={<Notifications />} />
           <Route path="/home/settings" element={<Settings />} />
           <Route path="/home/logout" element={<LogoutPopup />} />
