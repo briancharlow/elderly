@@ -6,25 +6,38 @@ const CaregiverDetails = () => {
   const { id } = useParams();
   const [caregiver, setCaregiver] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
     const fetchCaregiver = async () => {
       try {
-        const response = await axios.get(
+        const caregiverResponse = await axios.get(
           `http://localhost:5000/caregiver/${id}`,
           {
             withCredentials: true,
           }
         );
-        const data = response.data;
-        console.log(data);
-        if (data.success) {
-          setCaregiver(data.caregiver[0]);
+        const caregiverData = caregiverResponse.data;
+        if (caregiverData.success) {
+          setCaregiver(caregiverData.caregiver);
         } else {
-          console.error("Error fetching caregiver:", data.message);
+          console.error("Error fetching caregiver:", caregiverData.message);
+        }
+
+        const ratingsResponse = await axios.get(
+          `http://localhost:5000/ratings/${id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        const ratingsData = ratingsResponse.data;
+        if (ratingsData.success) {
+          setRatings(ratingsData.ratings);
+        } else {
+          console.error("Error fetching ratings:", ratingsData.message);
         }
       } catch (error) {
-        console.error("Error fetching caregiver:", error);
+        console.error("Error fetching caregiver or ratings:", error);
       } finally {
         setLoading(false);
       }
@@ -47,8 +60,19 @@ const CaregiverDetails = () => {
       <p>Location: {caregiver.location}</p>
       <p>Specialization: {caregiver.qualifications}</p>
       <p>Description: {caregiver.description}</p>
-      <p>Rating: {caregiver.ratings}</p>
-      {/* Add more details as needed */}
+      <h3>Ratings</h3>
+      {ratings.length > 0 ? (
+        <ul>
+          {ratings.map((rating) => (
+            <li key={rating.id}>
+              <p>Rating: {rating.rating}</p>
+              <p>Comment: {rating.comment}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No ratings available for this caregiver.</p>
+      )}
     </div>
   );
 };
