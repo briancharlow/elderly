@@ -63,7 +63,9 @@ const CaregiversList = () => {
               <hr />
               <div className="caregiver-actions">
                 <span>Rating: {caregiver.ratings}</span>
-                <button>View more</button>
+                <button onClick={() => handleViewMore(caregiver.id)}>
+                  View more
+                </button>
               </div>
             </div>
           ))}
