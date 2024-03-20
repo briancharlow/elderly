@@ -3,8 +3,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Avatar } from "@material-ui/core";
 import "./center.css";
+import { useNavigate } from "react-router-dom";
 
 const CaregiversList = () => {
+  const navigate = useNavigate();
+
+  const handleViewMore = (caregiverId) => {
+    navigate(`/caregiver/${caregiverId}`);
+  };
+
   const [caregivers, setCaregivers] = useState([]);
   const [loading, setLoading] = useState(true);
 
