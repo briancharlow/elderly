@@ -128,40 +128,6 @@ async function rateCaregivers(req, res) {
         });
     }
 }
-async function getRatings(req, res) {
-    const { pool } = req;
-    const { caregiverId } = req.params;
-
-    try {
-        if (pool.connected) {
-            let results = await pool.request()
-                .input('caregiver_id', caregiverId)
-                .execute('GetCaregiverRatings');
-
-            const ratings = results.recordset;
-            console.log(ratings)
-
-            if (ratings && ratings.length > 0) {
-                // Ratings are retrieved successfully
-                res.status(200).json({
-                    success: true,
-                    ratings: ratings,
-                });
-            } else {
-                res.status(404).json({
-                    success: false,
-                    message: "No ratings found for the caregiver",
-                });
-            }
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            success: false,
-            message: "An error occurred while processing your request",
-        });
-    }
-}
 
 
-module.exports = { searchCaregiver, requestAppointment, rateCaregivers, getRatings };
+module.exports = { searchCaregiver, requestAppointment, rateCaregivers };

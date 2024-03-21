@@ -19,7 +19,7 @@ const CaregiverDetails = () => {
         );
         const caregiverData = caregiverResponse.data;
         if (caregiverData.success) {
-          setCaregiver(caregiverData.caregiver);
+          setCaregiver(caregiverData.caregiver[0]);
         } else {
           console.error("Error fetching caregiver:", caregiverData.message);
         }

@@ -1,7 +1,7 @@
 const express = require('express');
 const Route = express.Router();
 
-const { registerUser, createCaregiver, loginUser, getLoggedInUser, logoutUser, getCaregiver, getCaregivers } = require('../Controllers/userControllers');
+const { registerUser, createCaregiver, loginUser, getLoggedInUser, logoutUser, getCaregiver, getCaregivers, getRatings } = require('../Controllers/userControllers');
 const { newUserMiddleware, newCaregiverMiddleware } = require('../middleware/newUserMiddleware');
 const { sessionAuthorization } = require('../middleware/sessionAuthorization');
 
@@ -18,6 +18,7 @@ Route.get("/user", sessionAuthorization, getLoggedInUser)
 Route.get("/logout", logoutUser)
 Route.get('/getcaregivers', getCaregivers);
 Route.get('/caregiver/:id', sessionAuthorization, getCaregiver);
+Route.get('/ratings/:caregiverId', getRatings);
 
 
 
