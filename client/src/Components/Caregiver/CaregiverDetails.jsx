@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import "./caregiver.css";
 
 const CaregiverDetails = () => {
   const { id } = useParams();
@@ -18,6 +19,8 @@ const CaregiverDetails = () => {
           }
         );
         const caregiverData = caregiverResponse.data;
+
+        console.log(caregiverData.caregiver[0]);
         if (caregiverData.success) {
           setCaregiver(caregiverData.caregiver[0]);
         } else {
@@ -57,22 +60,31 @@ const CaregiverDetails = () => {
   return (
     <div className="view-more">
       <div className="credentials">
-        <h2>{caregiver.fullname}</h2>
-        <p>Location: {caregiver.location}</p>
-        <p>Specialization: {caregiver.qualifications}</p>
-        <p>Description: {caregiver.description}</p>
+        <div className=" left">
+          <h2>{caregiver.fullname}</h2>
+          <p>Location: {caregiver.location}</p>
+          <p>Specialization: {caregiver.qualifications}</p>
+          <p>Description: {caregiver.description}</p>
+        </div>
+        <div className="right">
+          <h2>Status: {caregiver.status}</h2>
+          <p>Contact: {caregiver.phone_number}</p>
+          <p>Education: {caregiver.education} </p>
+          <p>Date Certified: {caregiver.date_of_certification}</p>
+        </div>
       </div>
       <div className="ratings">
-        <h3>Ratings</h3>
+        <h2>Reviews</h2>
         {ratings.length > 0 ? (
-          <ul>
+          <div className="ratings-list">
             {ratings.map((rating) => (
-              <li key={rating.id}>
-                <p>Rating: {rating.rating}</p>
-                <p>Comment: {rating.comment}</p>
-              </li>
+              <div className="rating" key={rating.id}>
+                <h3>{rating.client_name}</h3>
+                <p>{rating.rating}</p>
+                <p>{rating.comment}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>No ratings available for this caregiver.</p>
         )}

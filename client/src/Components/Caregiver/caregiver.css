@@ -1,0 +1,36 @@
+.view-more {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-top: 2rem;
+}
+
+.credentials {
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  width: 60rem;
+  gap: 4rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+.left .right {
+  display: flex;
+  flex-direction: column;
+}
+.ratings-list {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  width: 60rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
+}
