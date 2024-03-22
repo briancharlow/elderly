@@ -55,24 +55,28 @@ const CaregiverDetails = () => {
   }
 
   return (
-    <div>
-      <h2>{caregiver.fullname}</h2>
-      <p>Location: {caregiver.location}</p>
-      <p>Specialization: {caregiver.qualifications}</p>
-      <p>Description: {caregiver.description}</p>
-      <h3>Ratings</h3>
-      {ratings.length > 0 ? (
-        <ul>
-          {ratings.map((rating) => (
-            <li key={rating.id}>
-              <p>Rating: {rating.rating}</p>
-              <p>Comment: {rating.comment}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No ratings available for this caregiver.</p>
-      )}
+    <div className="view-more">
+      <div className="credentials">
+        <h2>{caregiver.fullname}</h2>
+        <p>Location: {caregiver.location}</p>
+        <p>Specialization: {caregiver.qualifications}</p>
+        <p>Description: {caregiver.description}</p>
+      </div>
+      <div className="ratings">
+        <h3>Ratings</h3>
+        {ratings.length > 0 ? (
+          <ul>
+            {ratings.map((rating) => (
+              <li key={rating.id}>
+                <p>Rating: {rating.rating}</p>
+                <p>Comment: {rating.comment}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No ratings available for this caregiver.</p>
+        )}
+      </div>
     </div>
   );
 };
