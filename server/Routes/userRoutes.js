@@ -7,9 +7,9 @@ const { sessionAuthorization } = require('../middleware/sessionAuthorization');
 
 
 
-Route.get('/', (req, res) => {
-    res.send('user route')
-})
+// Route.get('/', (req, res) => {
+//     res.send('user route')
+// })
 
 Route.post('/register', newUserMiddleware, registerUser);
 Route.post('/createcaregiver', newCaregiverMiddleware, createCaregiver);
@@ -18,7 +18,6 @@ Route.get("/user", sessionAuthorization, getLoggedInUser)
 Route.get("/logout", logoutUser)
 Route.get('/getcaregivers', getCaregivers);
 Route.get('/caregiver/:id', sessionAuthorization, getCaregiver);
-Route.get('/ratings/:caregiverId', getRatings);
 
 
 
