@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./RatingForm.css";
+import "./rating.css";
 
 const RatingForm = ({ caregiverId }) => {
   const [rating, setRating] = useState(0);
