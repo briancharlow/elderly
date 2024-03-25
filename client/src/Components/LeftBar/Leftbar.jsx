@@ -15,7 +15,6 @@ import "./leftbar.css";
 import "../Navbar/nav.css";
 // import Logo from "../img/logo2.png";
 
-
 const LeftBar = ({ isOpen, onClose }) => {
   const navigate = useNavigate(); // Initialize the useNavigate hook
   const location = useLocation(); // Initialize the useLocation hook
@@ -45,21 +44,6 @@ const LeftBar = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleThemeSwitcherClose = () => {
-    // Close the theme switcher popup
-    setShowThemeSwitcher(false);
-  };
-
-  const handleColorChange = (color) => {
-    // Handle the color change logic by updating the root variables
-    document.documentElement.style.setProperty("--maincolor", color);
-    document.documentElement.style.setProperty("--secondarycolor", color);
-    // You can add more properties like --secondarycolor, --textcolor, etc.
-
-    // Close the theme switcher popup after color change
-    handleThemeSwitcherClose();
-  };
-
   return (
     <Drawer
       variant="persistent"
@@ -74,9 +58,7 @@ const LeftBar = ({ isOpen, onClose }) => {
       {/* <img className="brand" src={Logo} alt="logo" /> */}
 
       <List>
-        <div className="nothing">
-
-        </div>
+        <div className="nothing"></div>
         <div
           onClick={() => handleIconClick("Home")}
           className={location.pathname === "/home" ? "active" : ""}
@@ -110,17 +92,7 @@ const LeftBar = ({ isOpen, onClose }) => {
             <ListItemText primary="Settings" />
           </ListItem>
         </div>
-        {/* <div
-          onClick={() => handleIconClick("Theme Switcher")}
-          className={location.pathname === "/theme" ? "active" : ""}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <Brightness4Icon />
-            </ListItemIcon>
-            <ListItemText primary="Theme Switcher" />
-          </ListItem>
-        </div> */}
+
         <div
           onClick={() => handleIconClick("Logout")}
           className={location.pathname === "/logout" ? "active" : ""}
@@ -133,14 +105,6 @@ const LeftBar = ({ isOpen, onClose }) => {
           </ListItem>
         </div>
       </List>
-
-      {/* Show the ThemeSwitcherPopup component if showThemeSwitcher is true */}
-      {/* {showThemeSwitcher && (
-        <ThemeSwitcherPopup
-          onClose={handleThemeSwitcherClose}
-          onColorChange={handleColorChange}
-        />
-      )} */}
     </Drawer>
   );
 };
