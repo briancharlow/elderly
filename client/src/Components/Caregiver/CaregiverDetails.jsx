@@ -34,6 +34,7 @@ const CaregiverDetails = () => {
           }
         );
         const ratingsData = ratingsResponse.data;
+        console.log("ratings", ratingsData.ratings);
         if (ratingsData.success) {
           setRatings(ratingsData.ratings);
         } else {
@@ -79,7 +80,7 @@ const CaregiverDetails = () => {
           <div className="ratings-list">
             {ratings.map((rating) => (
               <div className="rating" key={rating.id}>
-                <h3>{rating.client_name}</h3>
+                <p>{rating.client_name}</p>
                 <p>{rating.rating}</p>
                 <p>{rating.comment}</p>
               </div>

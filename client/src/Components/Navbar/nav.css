@@ -17,7 +17,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-
 }
 .search {
   display: flex;
@@ -114,8 +113,8 @@
 .search-results {
   position: absolute;
   margin-top: 10px;
-  top: 50px;
-  left: 600px;
+  top: 60px;
+  left: 650px;
   width: 400px;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
