@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../css/popup.css";
+import "./popup.css";
 
-const Logout = ({ setShowLogoutPopup }) => {
+const Logout = () => {
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -17,8 +17,6 @@ const Logout = ({ setShowLogoutPopup }) => {
       });
       console.log(response);
       if (response.data === "Logged out successfully") {
-        // Logout successful, navigate to home
-
         navigate("/login");
       } else {
         // Handle logout failure
