@@ -1,0 +1,30 @@
+/* RatingForm.css */
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.star-rating label {
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating .star {
+  transition: color 0.2s;
+}
+
+.star-rating .star.filled {
+  color: #ff9800;
+}
