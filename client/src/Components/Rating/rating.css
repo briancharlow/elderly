@@ -1,5 +1,16 @@
 /* RatingForm.css */
-
+.container-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+  width: 60rem;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 1rem;
+  padding: 2rem;
+}
 .rating-container {
   display: flex;
   align-items: center;
@@ -27,4 +38,25 @@
 
 .star-rating .star.filled {
   color: #ff9800;
+}
+.comment-text {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 1rem;
+}
+.comment-text button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #512da8;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 30%;
+  align-self: flex-end;
+}
+.comment-text button:hover {
+  background-color: #5c6bc0;
 }

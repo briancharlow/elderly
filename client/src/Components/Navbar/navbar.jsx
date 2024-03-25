@@ -43,7 +43,7 @@ const Navbar = ({ onToggleLeftBar }) => {
       setSearchResults(response.data.caregivers);
     } catch (error) {
       console.error(error);
-    
+
       alert("Error while searching for caregivers.");
     } finally {
       setLoading(false);
@@ -51,7 +51,13 @@ const Navbar = ({ onToggleLeftBar }) => {
   };
 
   return (
-    <div className="navbar">
+    <div
+      className="navbar"
+      style={{
+        position: "sticky",
+        zIndex: 9999,
+      }}
+    >
       <div className="toolbar">
         <div className="menu-button" onClick={onToggleLeftBar}>
           <FaChevronRight />

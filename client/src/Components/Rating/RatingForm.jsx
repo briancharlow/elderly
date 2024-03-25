@@ -44,7 +44,7 @@ const RatingForm = ({ caregiverId }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="container-rating" onSubmit={handleSubmit}>
       <div className="rating-container">
         <label>Rating:</label>
         <div className="star-rating">
@@ -69,15 +69,15 @@ const RatingForm = ({ caregiverId }) => {
           })}
         </div>
       </div>
-      <div>
-        <label htmlFor="comment">Comment:</label>
+      <div className="comment-text">
         <textarea
+          placeholder="Comment..."
           id="comment"
           value={comment}
           onChange={handleCommentChange}
         ></textarea>
+        <button type="submit">Submit Rating</button>
       </div>
-      <button type="submit">Submit Rating</button>
     </form>
   );
 };
