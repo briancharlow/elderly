@@ -16,7 +16,7 @@ Route.post('/createcaregiver', newCaregiverMiddleware, createCaregiver);
 Route.post('/login', loginUser)
 Route.get("/user", sessionAuthorization, getLoggedInUser)
 Route.get("/logout", sessionAuthorization, logoutUser)
-Route.get('/getcaregivers', getCaregivers);
+Route.get('/getcaregivers',sessionAuthorization, getCaregivers);
 Route.get('/caregiver/:id', sessionAuthorization, getCaregiver);
 
 
