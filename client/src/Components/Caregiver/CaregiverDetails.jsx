@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./caregiver.css";
+import RatingForm from "../Rating/RatingForm";
 
 const CaregiverDetails = () => {
   const { id } = useParams();
@@ -74,6 +75,7 @@ const CaregiverDetails = () => {
           <p>Date Certified: {caregiver.date_of_certification}</p>
         </div>
       </div>
+      <RatingForm caregiverId={id} />
       <div className="ratings">
         <h2>Reviews</h2>
         {ratings.length > 0 ? (
