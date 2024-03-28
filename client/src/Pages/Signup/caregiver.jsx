@@ -5,7 +5,7 @@ import axios from "axios";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate } from "react-router-dom";
 
-const CaregiverSignUpForm = ({ onSignUp }) => {
+const CaregiverSignUpForm = () => {
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
@@ -14,10 +14,8 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const location = useLocation();
-  const user = location.state.user;
-
-  console.log("this is the user:", user);
-
+  const user = location.state;
+  console.log(user);
   const navigate = useNavigate();
 
   const caregiver = { ...user, phone, description, password, certificationId };
@@ -26,6 +24,7 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
 
   const handleSubmit = async () => {
     try {
+      console.log(caregiver);
       const response = await axios.post(
         "http://localhost:5000/createcaregiver",
         caregiver
@@ -42,6 +41,7 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
       }
     } catch (error) {
       console.log(error);
+      console.log("error");
     }
   };
 
@@ -136,3 +136,10 @@ const CaregiverSignUpForm = ({ onSignUp }) => {
 };
 
 export default CaregiverSignUpForm;
+// import React from "react";
+
+// const caregiver = () => {
+//   return <div>caregiver</div>;
+// };
+
+// export default caregiver;
