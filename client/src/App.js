@@ -8,8 +8,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CaregiverDetails from "./Components/Caregiver/CaregiverDetails";
 import Logout from "./Components/Logout/Logout";
-import Clarence from "./Pages/Login/Clarence";
-import Trial from "./Pages/Signup/Trial";
 
 
 
@@ -18,8 +16,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Clarence />} />
-        <Route path="/caregiver" element={<Trial />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/caregiver" element={<CaregiverSignUpForm />} />
         <Route path="/guardian" element={<GuardianSignUpForm />} />
         <Route path="/home" element={<Home />}>
           <Route index element={<CaregiversList />} />
