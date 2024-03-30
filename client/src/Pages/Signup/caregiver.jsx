@@ -27,7 +27,9 @@ const CaregiverSignUpForm = () => {
       console.log(caregiver);
       const response = await axios.post(
         "http://localhost:5000/createcaregiver",
-        caregiver
+        {
+          caregiver,
+        }
       );
       console.log(response);
       const data = response.data;
