@@ -29,10 +29,12 @@ const LoginForm = () => {
   };
 
   const handleCaregiverSignUp = async (e) => {
+    e.preventDefault();
     navigate("/caregiver", { state: { user } });
   };
 
   const handleGuardianSignUp = async (e) => {
+    e.preventDefault();
     navigate("/guardian");
   };
 
@@ -60,9 +62,7 @@ const LoginForm = () => {
         alert(`Login failed: ${data.message}`);
         return;
       } else if (data.success) {
-        // Handle successful login, e.g., store the token in local storage or state.
         navigate("/home");
-
         alert("Login successful");
       }
     } catch (error) {
@@ -70,7 +70,6 @@ const LoginForm = () => {
       alert("An error occurred. Please try again.");
     }
   };
-
   return (
     <div className={`login ${isSignUp ? "active" : ""}`}>
       <div className="form-container sign-up">
