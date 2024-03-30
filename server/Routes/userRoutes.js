@@ -12,11 +12,11 @@ const { sessionAuthorization } = require('../middleware/sessionAuthorization');
 // })
 
 Route.post('/register', newUserMiddleware, registerUser);
-Route.post('/createcaregiver', newCaregiverMiddleware, createCaregiver);
+Route.post('/createcaregiver', createCaregiver);
 Route.post('/login', loginUser)
 Route.get("/user", sessionAuthorization, getLoggedInUser)
 Route.get("/logout", sessionAuthorization, logoutUser)
-Route.get('/getcaregivers',sessionAuthorization, getCaregivers);
+Route.get('/getcaregivers', sessionAuthorization, getCaregivers);
 Route.get('/caregiver/:id', sessionAuthorization, getCaregiver);
 
 

@@ -3,7 +3,8 @@ require('dotenv').config();
 const getAUser = require('../utils/getAUser');
 const { password } = require('../Config/dbconfig');
 const jwt = require("jsonwebtoken");
-const fs = require('fs');
+// const fs = require('fs');
+const fs = require('fs').promises;
 
 async function registerUser(req, res) {
     const pool = req.pool;
@@ -35,28 +36,27 @@ async function registerUser(req, res) {
 }
 
 
+
+
 async function createCaregiver(req, res) {
     const pool = req.pool;
     const caregiver = req.body;
 
     try {
-        // Read the caregivers.json file to check if the user already exists
-        const caregiversData = fs.readFileSync('caregivers.json', 'utf8');
+        // Read the caregivers.json file asynchronously
+        const caregiversData = await fs.readFile('caregivers.json', 'utf8');
         const caregivers = JSON.parse(caregiversData);
-
-        const caregiverExists = caregivers.find(c => c.certification_id == caregiver.certification_id);
-
-        console.log(caregiverExists);
-        const { qualifications, date_of_certification, institution_of_certification } = caregiverExists;
+        const caregiverExists = caregivers.find(c => c.certification_id === caregiver.certification_id);
 
         if (!caregiverExists) {
-            res.status(400).json({
-                success: false,
-                message: "You should be certified to sign up as a caregiver!"
-            });
-        } else {
-            const hashedPassword = await bcrypt.hash(caregiver.password, 8);
-            if (pool.connected) {
+            return res.status(400).json({ success: false, message: "You should be certified to sign up as a caregiver!" });
+        }
+
+        const { qualifications, date_of_certification, institution_of_certification } = caregiverExists;
+        const hashedPassword = await bcrypt.hash(caregiver.password, 8);
+
+        if (pool.connected) {
+            try {
                 const result = await pool.request()
                     .input("certification_id", caregiver.certification_id)
                     .input("fullname", caregiver.fullname)
@@ -69,48 +69,41 @@ async function createCaregiver(req, res) {
                     .input("date_of_certification", date_of_certification)
                     .input("education", institution_of_certification)
                     .execute("sp_CreateCaregiver");
-                console.log(result)
-                // Check the number of rows affected to determine success
+
                 if (result.rowsAffected && result.rowsAffected[0] > 0) {
-                    res.status(200).json({
+                    return res.status(200).json({
                         success: true,
                         message: "Caregiver created successfully!"
                     });
                 } else {
-                    // Handle specific error cases, if necessary
-                    res.status(500).json({
-                        success: false,
-                        message: "Caregiver creation failed. Please try again later."
-                    });
+                    return res.status(500).json({ success: false, message: "Caregiver creation failed. Please try again later." });
                 }
+            } catch (error) {
+                console.error('Error executing SQL query:', error);
+                return res.status(500).json({ success: false, message: "An error occurred while creating the caregiver." });
             }
+        } else {
+            return res.status(500).json({ success: false, message: "Database connection is not established." });
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
+        console.error('Error reading caregivers.json:', error);
+        return res.status(500).json({ success: false, message: "An error occurred while processing your request." });
     }
 }
 
 async function getLoggedInUser(req, res) {
     try {
-        let user = req.session.user;
+        const user = req.session.user;
         if (user) {
-            res.json({
-                success: true,
-                message: "user found",
-                user: user,
-            });
+            return res.json({ success: true, message: "User found", user });
         } else {
-            res.status(404).json({
-                success: false,
-                message: "No user found",
-            });
+            return res.status(404).json({ success: false, message: "No user found" });
         }
     } catch (error) {
-        res.send(error.message);
+        console.error('Error getting logged-in user:', error);
+        return res.status(500).json({ success: false, message: "An error occurred while processing your request." });
     }
 }
-
 
 async function loginUser(req, res) {
     const { email, pwd } = req.body;
