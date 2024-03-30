@@ -14,7 +14,7 @@ const CaregiverSignUpForm = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const location = useLocation();
-  const user = location.state;
+  const user = location.state?.user || {}; // Safely access user from location state
   console.log(user);
   const navigate = useNavigate();
 
@@ -22,7 +22,8 @@ const CaregiverSignUpForm = () => {
 
   console.log("this is the caregiver:", caregiver);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       console.log(caregiver);
       const response = await axios.post(
@@ -36,14 +37,19 @@ const CaregiverSignUpForm = () => {
       console.log(data);
 
       if (data.success) {
-        alert("signup succesfull");
-        navigate("/login");
+        setAlertMessage("Signup successful");
+        setShowAlert(true);
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } else {
-        alert("signup failed, check credentials and try again");
+        setAlertMessage("Signup failed, check credentials and try again");
+        setShowAlert(true);
       }
     } catch (error) {
       console.log(error);
-      console.log("error");
+      setAlertMessage("An error occurred. Please try again.");
+      setShowAlert(true);
     }
   };
 
