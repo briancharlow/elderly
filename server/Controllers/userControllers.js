@@ -11,7 +11,8 @@ async function registerUser(req, res) {
     const user = req.body;
 
     try {
-        const hashedPassword = await bcrypt.hash(user.password, 8);
+        const salt = await bcrypt.genSalt(8); // Generate a salt value with cost factor 8
+        const hashedPassword = await bcrypt.hash(caregiver.password, salt);
         if (pool.connected) {
             const result = await pool.request()
                 .input("fullname", user.fullname)
