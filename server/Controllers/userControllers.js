@@ -4,7 +4,7 @@ const getAUser = require('../utils/getAUser');
 const { password } = require('../Config/dbconfig');
 const jwt = require("jsonwebtoken");
 // const fs = require('fs');
-const fs = require('fs').promises;
+const fs = require('fs');
 
 async function registerUser(req, res) {
     const pool = req.pool;
@@ -40,30 +40,25 @@ async function registerUser(req, res) {
 
 
 async function createCaregiver(req, res) {
-    const pool = req.pool;
-    const caregiver = req.body;
 
-    try {
-        // Read the caregivers.json file asynchronously
-        const caregiversData = await fs.readFile('caregivers.json', 'utf8');
+    const pool = req.pool; const caregiver = req.body; try { // Read the caregivers.json file to check if the user already exists 
+        const caregiversData = fs.readFileSync('caregivers.json', 'utf8');
         const caregivers = JSON.parse(caregiversData);
-        const caregiverExists = caregivers.find(c => c.certification_id === caregiver.certification_id);
+        const caregiverExists = caregivers.find(c => c.certification_id == caregiver.certification_id);
+        console.log(caregiverExists);
+        const { qualifications, date_of_certification, institution_of_certification } = caregiverExists;
 
         if (!caregiverExists) {
-            return res.status(400).json({ success: false, message: "You should be certified to sign up as a caregiver!" });
-        }
+            res.status(400).json({ success: false, message: "You should be certified to sign up as a caregiver!" });
+        } else {
+            const saltRounds = 8; // Adjust cost factor as needed
+            const hashedPassword = await bcrypt.hash(caregiver.password, saltRounds);
 
-        const { qualifications, date_of_certification, institution_of_certification } = caregiverExists;
-        const hashedPassword = await bcrypt.hash(caregiver.password, 8);
-
-        if (pool.connected) {
-            try {
+            if (pool.connected) {
                 const result = await pool.request()
                     .input("certification_id", caregiver.certification_id)
-                    .input("fullname", caregiver.fullname)
-                    .input("location", caregiver.location)
-                    .input("email", caregiver.email)
-                    .input("phone_number", caregiver.phone)
+                    .input("fullname", caregiver.fullname).input("location", caregiver.location)
+                    .input("email", caregiver.email).input("phone_number", caregiver.phone)
                     .input("description", caregiver.description)
                     .input("password", hashedPassword)
                     .input("qualifications", qualifications)
@@ -71,38 +66,40 @@ async function createCaregiver(req, res) {
                     .input("education", institution_of_certification)
                     .execute("sp_CreateCaregiver");
 
+                console.log(result) // Check the number of rows affected to determine success 
                 if (result.rowsAffected && result.rowsAffected[0] > 0) {
-                    return res.status(200).json({
-                        success: true,
-                        message: "Caregiver created successfully!"
-                    });
-                } else {
-                    return res.status(500).json({ success: false, message: "Caregiver creation failed. Please try again later." });
+                    res.status(200).json({ success: true, message: "Caregiver created successfully!" });
+
+                } else { // Handle specific error cases, if necessary
+                    res.status(500).json({ success: false, message: "Caregiver creation failed. Please try again later." });
                 }
-            } catch (error) {
-                console.error('Error executing SQL query:', error);
-                return res.status(500).json({ success: false, message: "An error occurred while creating the caregiver." });
             }
-        } else {
-            return res.status(500).json({ success: false, message: "Database connection is not established." });
         }
+
     } catch (error) {
-        console.error('Error reading caregivers.json:', error);
-        return res.status(500).json({ success: false, message: "An error occurred while processing your request." });
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
 }
 
 async function getLoggedInUser(req, res) {
     try {
-        const user = req.session.user;
+        let user = req.session.user;
         if (user) {
-            return res.json({ success: true, message: "User found", user });
+            res.json({
+                success: true,
+                message: "user found",
+                user: user,
+            });
         } else {
-            return res.status(404).json({ success: false, message: "No user found" });
+            res.status(404).json({
+                success: false,
+                message: "No user found",
+            });
         }
+
     } catch (error) {
-        console.error('Error getting logged-in user:', error);
-        return res.status(500).json({ success: false, message: "An error occurred while processing your request." });
+        res.send(error.message);
     }
 }
 
