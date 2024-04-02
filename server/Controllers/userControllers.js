@@ -41,7 +41,10 @@ async function registerUser(req, res) {
 
 async function createCaregiver(req, res) {
 
-    const pool = req.pool; const caregiver = req.body; try { // Read the caregivers.json file to check if the user already exists 
+    const pool = req.pool;
+    const caregiver = req.body;
+
+    try { // Read the caregivers.json file to check if the user already exists 
         const caregiversData = fs.readFileSync('caregivers.json', 'utf8');
         const caregivers = JSON.parse(caregiversData);
         const caregiverExists = caregivers.find(c => c.certification_id == caregiver.certification_id);

@@ -14,8 +14,9 @@ const CaregiverSignUpForm = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const location = useLocation();
+
   const user = location.state?.user || {}; // Safely access user from location state
-  console.log(user);
+  console.log("this is the user", user);
   const navigate = useNavigate();
 
   const caregiver = { ...user, phone, description, password, certificationId };
@@ -144,10 +145,3 @@ const CaregiverSignUpForm = () => {
 };
 
 export default CaregiverSignUpForm;
-// import React from "react";
-
-// const caregiver = () => {
-//   return <div>caregiver</div>;
-// };
-
-// export default caregiver;
