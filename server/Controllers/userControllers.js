@@ -12,7 +12,7 @@ async function registerUser(req, res) {
 
     try {
         const salt = await bcrypt.genSalt(8); // Generate a salt value with cost factor 8
-        const hashedPassword = await bcrypt.hash(caregiver.password, salt);
+        const hashedPassword = await bcrypt.hash(user.password, salt);
         if (pool.connected) {
             const result = await pool.request()
                 .input("fullname", user.fullname)
@@ -21,7 +21,7 @@ async function registerUser(req, res) {
                 .input("email", user.email)
                 .input("emergency_contact", user.phone)
                 .execute("CreateNewUser");
-
+            console.log(result)
 
 
             if (result.recordset && result.recordset.length > 0 && result.recordset[0].success === 1) {
@@ -51,8 +51,8 @@ async function createCaregiver(req, res) {
         if (!caregiverExists) {
             res.status(400).json({ success: false, message: "You should be certified to sign up as a caregiver!" });
         } else {
-            const saltRounds = 8; // Adjust cost factor as needed
-            const hashedPassword = await bcrypt.hash(caregiver.password, saltRounds);
+            const salt = await bcrypt.genSalt(8); // Generate a salt value with cost factor 8
+            const hashedPassword = await bcrypt.hash(caregiver.password, salt);
 
             if (pool.connected) {
                 const result = await pool.request()
