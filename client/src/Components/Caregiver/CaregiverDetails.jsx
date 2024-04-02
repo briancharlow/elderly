@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./caregiver.css";
 import RatingForm from "../Rating/RatingForm";
 
@@ -15,12 +16,9 @@ const CaregiverDetails = () => {
       try {
         const caregiverResponse = await axios.get(
           `http://localhost:5000/caregiver/${id}`,
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
         const caregiverData = caregiverResponse.data;
-
         console.log(caregiverData.caregiver[0]);
         if (caregiverData.success) {
           setCaregiver(caregiverData.caregiver[0]);
@@ -30,9 +28,7 @@ const CaregiverDetails = () => {
 
         const ratingsResponse = await axios.get(
           `http://localhost:5000/ratings/${id}`,
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
         const ratingsData = ratingsResponse.data;
         console.log("ratings", ratingsData.ratings);
@@ -67,6 +63,9 @@ const CaregiverDetails = () => {
           <p>Location: {caregiver.location}</p>
           <p>Specialization: {caregiver.qualifications}</p>
           <p>Description: {caregiver.description}</p>
+          <Link to={`/book/${id}`}>
+            <button>Book</button>
+          </Link>
         </div>
         <div className="right">
           <h2>Status: {caregiver.status}</h2>
@@ -77,13 +76,24 @@ const CaregiverDetails = () => {
       </div>
       <RatingForm caregiverId={id} />
       <div className="ratings">
-        <h2>Reviews</h2>
-        {ratings.length > 0 ? (
+        <h2>Ratings:</h2>
+        {ratings && ratings.length > 0 ? (
           <div className="ratings-list">
             {ratings.map((rating) => (
               <div className="rating" key={rating.id}>
                 <p>{rating.client_name}</p>
-                <p>{rating.rating}</p>
+                <div className="star-rating">
+                  {[...Array(5)].map((_, index) => (
+                    <span
+                      key={index}
+                      className={`star ${
+                        rating.rating > index ? "filled" : ""
+                      }`}
+                    >
+                      &#9733;
+                    </span>
+                  ))}
+                </div>
                 <p>{rating.comment}</p>
               </div>
             ))}

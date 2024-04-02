@@ -42,7 +42,8 @@ async function searchCaregiver(req, res) {
 async function requestAppointment(req, res) {
     const { pool } = req;
 
-    const { caregiverId, date, startTime, endTime } = req.body;
+    const { date, startTime, endTime } = req.body;
+    const { caregiverId } = req.params;
     const clientId = req.session.user.id;
 
 

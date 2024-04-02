@@ -33,7 +33,7 @@ const CaregiverSignUpForm = () => {
           caregiver,
         }
       );
-      console.log(response);
+      console.log("this is the response", response);
       const data = response.data;
       console.log(data);
 
