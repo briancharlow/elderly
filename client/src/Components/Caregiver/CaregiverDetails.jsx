@@ -63,7 +63,7 @@ const CaregiverDetails = () => {
           <p>Location: {caregiver.location}</p>
           <p>Specialization: {caregiver.qualifications}</p>
           <p>Description: {caregiver.description}</p>
-          <Link to={`/book/${id}`}>
+          <Link to={`/home/book/${id}`}>
             <button>Book</button>
           </Link>
         </div>

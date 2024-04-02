@@ -7,6 +7,7 @@ import Home from "./Pages/Home/home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CaregiverDetails from "./Components/Caregiver/CaregiverDetails";
+import Book from "./Components/Book/Book";
 import Logout from "./Components/Logout/Logout";
 
 
@@ -23,6 +24,7 @@ const App = () => {
           <Route index element={<CaregiversList />} />
           <Route path="/home/caregiver/:id" element={<CaregiverDetails />} />
           <Route path="/home/logout" element={<Logout />} />
+          <Route path="/home/book/:id" element={<Book />} />
 
           {/* <Route path="/home/notifications" element={<Notifications />} />
           <Route path="/home/settings" element={<Settings />} />
