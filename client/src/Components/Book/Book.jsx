@@ -27,6 +27,7 @@ const Book = () => {
           withCredentials: true,
         }
       );
+      console.log(response);
 
       if (response.data.success) {
         setShowSuccess(true);

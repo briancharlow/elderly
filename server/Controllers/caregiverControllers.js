@@ -47,22 +47,23 @@ async function approveAppointment(req, res) {
 }
 async function getAppointments(req, res) {
     const { pool } = req;
-    const caregiverId = req.session.user.id;
+    const userId = req.session.user.id; // Assuming the user ID can be either caregiver or client ID
+
     try {
         if (pool.connected) {
             let results = await pool.request()
-                .input('caregiverId', caregiverId)
+                .input('id', userId) // Pass the user ID to the stored procedure
                 .execute('getAppointments');
 
             const appointments = results.recordsets[0];
-            console.log(appointments);
-            if (results.rowsAffected[0] === 0) {
+
+            // Check if appointments are found
+            if (appointments.length === 0) {
                 res.status(404).json({
                     success: false,
                     message: "No appointments found",
-                })
-            }
-            else {
+                });
+            } else {
                 res.status(200).json({
                     success: true,
                     message: "Appointments found",
@@ -71,9 +72,14 @@ async function getAppointments(req, res) {
             }
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while processing your request",
+        });
     }
 }
+
 async function deleteAccount(req, res) {
     const { id } = req.session.user.id;
     try {
