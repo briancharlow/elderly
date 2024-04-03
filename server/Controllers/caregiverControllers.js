@@ -45,6 +45,42 @@ async function approveAppointment(req, res) {
         });
     }
 }
+async function rejectAppointment(req, res) {
+    const { pool } = req;
+    const caregiverId = req.session.user.id;
+    const { appointmentId } = req.params;
+
+    try {
+        if (pool.connected) {
+            let results = await pool.request()
+                .input('CaregiverId', caregiverId)
+                .input('AppointmentId', appointmentId)
+                .execute('RejectAppointment');
+
+            if (results.rowsAffected[0] === 0) {
+                // No appointment found or appointment does not belong to this caregiver
+                res.status(404).json({
+                    success: false,
+                    message: "Appointment not found or does not belong to this caregiver",
+                });
+            }
+            else {
+                // Appointment rejected successfully
+                res.status(200).json({
+                    success: true,
+                    message: "Appointment rejected successfully",
+                });
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+}
+
 async function getAppointments(req, res) {
     const { pool } = req;
     const userId = req.session.user.id; // Assuming the user ID can be either caregiver or client ID
@@ -92,4 +128,4 @@ async function deleteAccount(req, res) {
 }
 
 
-module.exports = { getAppointments, approveAppointment, updateProfile, deleteAccount }
+module.exports = { getAppointments, approveAppointment, updateProfile, deleteAccount, rejectAppointment }
