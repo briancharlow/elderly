@@ -242,7 +242,17 @@ async function getCaregiver(req, res) {
     }
 }
 
+async function getSession(req, res) {
+    if (req.session.authorized && req.session.user) {
+        res.json({
+            authorized: req.session.authorized,
+            user: req.session.user,
+            role: req.session.user.role
+        });
+    } else {
+        res.status(401).json({ message: 'Unauthorized' });
+    }
+}
 
 
-
-module.exports = { registerUser, createCaregiver, loginUser, logoutUser, getLoggedInUser, getCaregiver, getCaregivers };
+module.exports = { registerUser, createCaregiver, loginUser, logoutUser, getLoggedInUser, getCaregiver, getCaregivers, getSession };
