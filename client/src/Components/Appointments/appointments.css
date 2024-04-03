@@ -1,0 +1,13 @@
+.appointment-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.appointment-actions {
+  margin-top: 10px;
+}
+
+.appointment-actions button {
+  margin-right: 5px;
+}
