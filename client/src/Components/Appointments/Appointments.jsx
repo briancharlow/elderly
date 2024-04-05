@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./appointments.css";
 
 const AppointmentList = () => {
   const [appointments, setAppointments] = useState([]);
@@ -52,7 +53,7 @@ const AppointmentList = () => {
       );
       // Update the appointment status in the local state
       const updatedAppointments = appointments.map((appointment) => {
-        if (appointment.id === appointmentId) {
+        if (appointment.appointment_id === appointmentId) {
           return { ...appointment, status: "accepted" };
         }
         return appointment;
@@ -72,7 +73,7 @@ const AppointmentList = () => {
       );
       // Update the appointment status in the local state
       const updatedAppointments = appointments.map((appointment) => {
-        if (appointment.id === appointmentId) {
+        if (appointment.appointment_id === appointmentId) {
           return { ...appointment, status: "rejected" };
         }
         return appointment;
@@ -92,53 +93,66 @@ const AppointmentList = () => {
   }
 
   return (
-    <div>
+    <div className="appointment-list-container">
       <h2>Appointments</h2>
-      <ul>
+      <div className="appointment-list">
         {appointments.map((appointment) => (
-          <li key={appointment.id} className="appointment-item">
-            <div>
-              <strong>Date:</strong> {appointment.date}
+          <div key={appointment.appointment_id} className="appointment-item">
+            <div className="appointment-details">
+              <div className="appointment-date">
+                {new Date(appointment.date).toLocaleDateString()}
+              </div>
+              <div className="appointment-times">
+                <div>
+                  <strong>Start:</strong>{" "}
+                  {new Date(appointment.start_time).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+                <div>
+                  <strong>End:</strong>{" "}
+                  {new Date(appointment.end_time).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+              </div>
             </div>
-            <div>
-              <strong>Time:</strong> {appointment.time}
+            <div className="appointment-info">
+              <div>
+                <strong>Client:</strong> {appointment.client_name}
+              </div>
+              <div>
+                <strong>Caregiver:</strong> {appointment.caregiver_name}
+              </div>
+              <div>
+                <strong>Status:</strong> {appointment.status}
+              </div>
             </div>
             {userRole === "caregiver" && (
               <div className="appointment-actions">
                 <button
-                  onClick={() => handleAcceptAppointment(appointment.id)}
+                  onClick={() =>
+                    handleAcceptAppointment(appointment.appointment_id)
+                  }
                   disabled={appointment.status === "accepted"}
                 >
                   Accept
                 </button>
                 <button
-                  onClick={() => handleRejectAppointment(appointment.id)}
+                  onClick={() =>
+                    handleRejectAppointment(appointment.appointment_id)
+                  }
                   disabled={appointment.status === "rejected"}
                 >
                   Reject
                 </button>
               </div>
             )}
-            {userRole === "guardian" && (
-              <div>
-                <strong>Caregiver:</strong> {appointment.caregiver_name}
-                <div>
-                  <strong>Status:</strong> {appointment.status}
-                  {appointment.status === "pending" && (
-                    <span> (kindly wait for a response)</span>
-                  )}
-                  {appointment.status === "rejected" && (
-                    <span>
-                      {" "}
-                      (kindly consider rescheduling or finding a new caregiver)
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

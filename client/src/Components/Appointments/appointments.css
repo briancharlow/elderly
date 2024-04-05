@@ -1,13 +1,70 @@
+.appointment-list-container {
+  padding: 20px;
+}
+
+.appointment-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
 .appointment-item {
-  border: 1px solid #ccc;
-  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 10px;
 }
 
+.appointment-date {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.appointment-times {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.appointment-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.appointment-info > div {
+  margin-bottom: 5px;
+}
+
 .appointment-actions {
+  display: flex;
+  justify-content: flex-end;
   margin-top: 10px;
 }
 
 .appointment-actions button {
-  margin-right: 5px;
+  margin-left: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.appointment-actions button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
