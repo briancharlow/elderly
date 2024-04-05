@@ -121,7 +121,7 @@ const AppointmentList = () => {
             )}
             {userRole === "guardian" && (
               <div>
-                <strong>Caregiver:</strong> {appointment.caregiverName}
+                <strong>Caregiver:</strong> {appointment.caregiver_name}
                 <div>
                   <strong>Status:</strong> {appointment.status}
                   {appointment.status === "pending" && (
