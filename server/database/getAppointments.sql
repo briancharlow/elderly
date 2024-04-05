@@ -4,25 +4,22 @@ AS
 BEGIN
   SET NOCOUNT ON;
 
-  -- Check if the provided ID belongs to a caregiver
-  IF EXISTS (SELECT 1 FROM Caregivers WHERE id = @id)
-  BEGIN
-    -- Retrieve appointments for the caregiver
-    SELECT *
-    FROM Appointments
-    WHERE caregiver_id = @id;
-  END
-  -- Check if the provided ID belongs to a client
-  ELSE IF EXISTS (SELECT 1 FROM Users WHERE id = @id)
-  BEGIN
-    -- Retrieve appointments for the client
-    SELECT *
-    FROM Appointments
-    WHERE client_id = @id;
-  END
-  ELSE
-  BEGIN
-    -- Invalid ID, return an error message or handle as needed
-    SELECT 'Invalid ID' AS ErrorMessage;
-  END
+  -- Retrieve appointments with client and caregiver names
+  SELECT 
+		A.status AS status,
+		A.id AS appointment_id,
+         A.date,
+         A.start_time,
+         A.end_time,
+         U.fullname AS client_name,
+         C.fullname AS caregiver_name
+  FROM Appointments A
+  LEFT JOIN Users U ON A.client_id = U.id
+  LEFT JOIN Caregivers C ON A.caregiver_id = C.id
+  WHERE A.client_id = @id OR A.caregiver_id = @id;
 END
+
+
+select * from Appointments
+
+exec getAppointments 'A77B8621-254D-40B5-A2A2-0872FD9F1F52'

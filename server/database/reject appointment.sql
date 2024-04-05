@@ -14,3 +14,6 @@ BEGIN
     SET status = 'rejected'
     WHERE id = @AppointmentId;
 END
+
+
+select * from Appointments

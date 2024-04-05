@@ -9,7 +9,13 @@ const AppointmentList = ({ userRole }) => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get("/getappointments");
+        const response = await axios.get(
+          "http://localhost:5000/getappointments",
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(response);
         setAppointments(response.data.appointments);
         setLoading(false);
       } catch (err) {
@@ -23,7 +29,12 @@ const AppointmentList = ({ userRole }) => {
 
   const handleAcceptAppointment = async (appointmentId) => {
     try {
-      await axios.post(`/acceptappointment/${appointmentId}`);
+      await axios.post(
+        `http://localhost:5000/acceptappointment/${appointmentId}`,
+        {
+          withCredentials: true,
+        }
+      );
       // Update the appointment status in the local state
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === appointmentId) {
@@ -39,7 +50,12 @@ const AppointmentList = ({ userRole }) => {
 
   const handleRejectAppointment = async (appointmentId) => {
     try {
-      await axios.post(`/rejectappointment/${appointmentId}`);
+      await axios.post(
+        `http://localhost:5000/rejectappointment/${appointmentId}`,
+        {
+          withCredentials: true,
+        }
+      );
       // Update the appointment status in the local state
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === appointmentId) {
@@ -89,7 +105,7 @@ const AppointmentList = ({ userRole }) => {
                 </button>
               </div>
             )}
-            {userRole === "client" && (
+            {userRole === "guardian" && (
               <div>
                 <strong>Caregiver:</strong> {appointment.caregiverName}
                 <div>

@@ -17,7 +17,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [fullname, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [userRole, setUserRole] = useState("");
 
   const navigate = useNavigate();
   const toggleForm = () => {
@@ -54,22 +53,9 @@ const LoginForm = () => {
       if (!data.success) {
         alert(`Login failed: ${data.message}`);
         return;
-      }
-
-      // Fetch session data after successful login
-      const sessionResponse = await axios.get(
-        "http://localhost:5000/getsession",
-        { withCredentials: true }
-      );
-      const sessionData = sessionResponse.data;
-
-      if (sessionData.authorized) {
-        // Store the user role in the component state or context
-        setUserRole(sessionData.role);
-        navigate("/home");
-        alert("Login successful");
       } else {
-        alert("Unauthorized");
+        alert("Login successful");
+        navigate("/home");
       }
     } catch (error) {
       console.error("Login error:", error);

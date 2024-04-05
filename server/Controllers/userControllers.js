@@ -105,40 +105,25 @@ async function getLoggedInUser(req, res) {
         res.send(error.message);
     }
 }
-
 async function loginUser(req, res) {
     const { email, pwd } = req.body;
     try {
         const { pool } = req;
         if (pool.connected) {
             const result = await pool.request().input('email', email).execute('Test');
-
             if (result.rowsAffected[0] === 0 && result.rowsAffected[1] === 0) {
-                res.status(404).json({
-                    success: false,
-                    message: "No user found",
-                });
+                res.status(404).json({ success: false, message: "No user found" });
             } else {
                 if (result.rowsAffected[0] === 1) {
                     const user = result.recordsets[0][0];
-
                     let passwords_match = await bcrypt.compare(pwd, user.password);
                     if (passwords_match) {
                         req.session.authorized = true;
                         req.session.user = user;
-
-                        res.status(200).json({
-                            success: true,
-                            message: "Login successful",
-                            role: "guardian"
-                        })
-
-                    }
-                    else {
-                        res.status(401).json({
-                            success: false,
-                            message: "Check credentials and try again"
-                        });
+                        req.session.role = 'guardian'; // Store the role in the session
+                        res.status(200).json({ success: true, message: "Login successful" });
+                    } else {
+                        res.status(401).json({ success: false, message: "Check credentials and try again" });
                     }
                 } else if (result.rowsAffected[1] === 1) {
                     const user = result.recordsets[1][0];
@@ -146,30 +131,19 @@ async function loginUser(req, res) {
                     if (passwords_match) {
                         req.session.authorized = true;
                         req.session.user = user;
-
-                        res.status(200).json({
-                            success: true,
-                            message: "Login successful",
-                            role: "caregiver"
-                        })
+                        req.session.role = 'caregiver'; // Store the role in the session
+                        res.status(200).json({ success: true, message: "Login successful" });
                     } else {
-                        res.status(401).json({
-                            success: false,
-                            message: "Check credentials and try again"
-                        });
+                        res.status(401).json({ success: false, message: "Check credentials and try again" });
                     }
                 }
             }
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({
-            success: false,
-            message: "Database connection error",
-        });
+        res.status(500).json({ success: false, message: "Database connection error" });
     }
 }
-
 async function logoutUser(req, res) {
     // console.log(req.session)
     console.log(req.session.user)
@@ -247,7 +221,7 @@ async function getSession(req, res) {
         res.json({
             authorized: req.session.authorized,
             user: req.session.user,
-            role: req.session.user.role
+            role: req.session.role // Get the role from the session
         });
     } else {
         res.status(401).json({ message: 'Unauthorized' });

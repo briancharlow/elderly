@@ -27,7 +27,7 @@ const LeftBar = ({ isOpen, onClose }) => {
         navigate("/home");
         break;
       case "Notifications":
-        navigate("/home/notifications");
+        navigate("/home/appointments");
         break;
       case "Settings":
         navigate("/home/settings");
@@ -78,7 +78,7 @@ const LeftBar = ({ isOpen, onClose }) => {
             <ListItemIcon>
               <NotificationsIcon />
             </ListItemIcon>
-            <ListItemText primary="Notifications" />
+            <ListItemText primary="Appointments" />
           </ListItem>
         </div>
         <div
