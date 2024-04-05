@@ -8,25 +8,21 @@ const AppointmentList = () => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    useEffect(() => {
-      const fetchUserRole = async () => {
-        try {
-          const response = await axios.get("http://localhost:5000/getsession", {
-            withCredentials: true,
-          });
-          const sessionData = response.data;
-          console.log(response.data);
+    const fetchUserRole = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/getsession", {
+          withCredentials: true,
+        });
+        const sessionData = response.data;
 
-          if (sessionData.authorized) {
-            setUserRole(sessionData.role);
-          }
-        } catch (error) {
-          console.error("Error fetching user session:", error);
+        if (sessionData.authorized) {
+          setUserRole(sessionData.role);
         }
-      };
+      } catch (error) {
+        console.error("Error fetching user session:", error);
+      }
+    };
 
-      fetchUserRole();
-    }, []);
     const fetchAppointments = async () => {
       try {
         const response = await axios.get(
@@ -35,7 +31,6 @@ const AppointmentList = () => {
             withCredentials: true,
           }
         );
-        console.log(response);
         setAppointments(response.data.appointments);
         setLoading(false);
       } catch (err) {
@@ -44,6 +39,7 @@ const AppointmentList = () => {
       }
     };
 
+    fetchUserRole();
     fetchAppointments();
   }, []);
 
@@ -51,9 +47,8 @@ const AppointmentList = () => {
     try {
       await axios.post(
         `http://localhost:5000/acceptappointment/${appointmentId}`,
-        {
-          withCredentials: true,
-        }
+        {},
+        { withCredentials: true }
       );
       // Update the appointment status in the local state
       const updatedAppointments = appointments.map((appointment) => {
@@ -72,9 +67,8 @@ const AppointmentList = () => {
     try {
       await axios.post(
         `http://localhost:5000/rejectappointment/${appointmentId}`,
-        {
-          withCredentials: true,
-        }
+        {},
+        { withCredentials: true }
       );
       // Update the appointment status in the local state
       const updatedAppointments = appointments.map((appointment) => {
