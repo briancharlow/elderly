@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const AppointmentList = ({ userRole }) => {
+const AppointmentList = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
+    useEffect(() => {
+      const fetchUserRole = async () => {
+        try {
+          const response = await axios.get("http://localhost:5000/getsession", {
+            withCredentials: true,
+          });
+          const sessionData = response.data;
+          console.log(response.data);
+
+          if (sessionData.authorized) {
+            setUserRole(sessionData.role);
+          }
+        } catch (error) {
+          console.error("Error fetching user session:", error);
+        }
+      };
+
+      fetchUserRole();
+    }, []);
     const fetchAppointments = async () => {
       try {
         const response = await axios.get(
