@@ -67,6 +67,7 @@ async function createCaregiver(req, res) {
                     .input("qualifications", qualifications)
                     .input("date_of_certification", date_of_certification)
                     .input("education", institution_of_certification)
+                    .input("fees", fees)
                     .execute("sp_CreateCaregiver");
 
                 console.log(result) // Check the number of rows affected to determine success 
