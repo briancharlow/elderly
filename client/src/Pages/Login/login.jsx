@@ -81,7 +81,7 @@ const LoginForm = () => {
               <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
           </div>
-          <input
+          {/* <input
             type="text"
             placeholder="Name"
             value={fullname}
@@ -98,7 +98,7 @@ const LoginForm = () => {
             placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-          />
+          /> */}
           <span className="option"> Sign Up as?</span>
           <div className="signup-as">
             <button onClick={handleCaregiverSignUp}>Caregiver</button>

@@ -1,5 +1,7 @@
-const { new_user_Schema } = require("../schema/userSchema");
+
 const { new_caregiver_Schema } = require("../schema/caregiverSchema");
+
+const { new_user_Schema } = require("../schema/userSchema");
 
 function newUserValidator(body) {
     let user = new_user_Schema.validate(body, { abortEarly: false });
