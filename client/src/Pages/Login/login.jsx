@@ -15,22 +15,15 @@ const LoginForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullname, setName] = useState("");
-  const [address, setAddress] = useState("");
 
   const navigate = useNavigate();
   const toggleForm = () => {
     setIsSignUp((prev) => !prev);
   };
-  const user = {
-    email: email,
-    fullname: fullname,
-    address: address,
-  };
 
   const handleCaregiverSignUp = async (e) => {
     e.preventDefault();
-    navigate("/caregiver", { state: { user } });
+    navigate("/caregiver");
   };
 
   const handleGuardianSignUp = async (e) => {
