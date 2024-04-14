@@ -8,6 +8,7 @@ import {
   faEnvelope,
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import "./guardian.css";
 
 const Guardian = () => {
   const [formData, setFormData] = useState({
