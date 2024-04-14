@@ -11,7 +11,7 @@ const { sessionAuthorization } = require('../middleware/sessionAuthorization');
 //     res.send('user route')
 // })
 
-Route.post('/register', newUserMiddleware, registerUser);
+Route.post('/register', registerUser);
 Route.post('/createcaregiver', createCaregiver);
 Route.post('/login', loginUser)
 Route.get("/user", sessionAuthorization, getLoggedInUser)

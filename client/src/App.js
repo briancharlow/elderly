@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "./Pages/Login/login";
 import CaregiverSignUpForm from "./Pages/Signup/caregiver";
-import GuardianSignUpForm from "./Pages/Signup/guardian";
+import Guardian from "./Pages/Signup/guardian";
 import CaregiversList from "./Components/CenterOutlet/centeroutlet";
 import Home from "./Pages/Home/home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,7 +19,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/caregiver" element={<CaregiverSignUpForm />} />
-        <Route path="/guardian" element={<GuardianSignUpForm />} />
+        <Route path="/guardian" element={<Guardian />} />
         <Route path="/home" element={<Home />}>
           <Route index element={<CaregiversList />} />
           <Route path="/home/caregiver/:id" element={<CaregiverDetails />} />

@@ -8,7 +8,7 @@ import {
   faEnvelope,
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import "./guardian.css";
+import "./guardian.css"
 
 const Guardian = () => {
   const [formData, setFormData] = useState({
@@ -20,16 +20,28 @@ const Guardian = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [activeInput, setActiveInput] = useState("");
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleInputFocus = (e) => {
+    setActiveInput(e.target.name);
+  };
+
+  const handleInputBlur = () => {
+    setActiveInput("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/register", formData);
+      const response = await axios.post(
+        "http://localhost:5000/register",
+        formData
+      );
       console.log(response.data);
       // Handle successful registration
     } catch (error) {
@@ -53,13 +65,17 @@ const Guardian = () => {
             name="fullname"
             value={formData.fullname}
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             placeholder="Full Name"
             required
           />
-          <div className="input-guide">
-            Please enter your full name as it appears on your official
-            documents.
-          </div>
+          {activeInput === "fullname" && (
+            <div className="input-guide">
+              Please enter your full name as it appears on your official
+              documents.
+            </div>
+          )}
         </div>
         <div className="form-group">
           <FontAwesomeIcon icon={faMapMarkerAlt} className="form-icon" />
@@ -69,12 +85,16 @@ const Guardian = () => {
             name="location"
             value={formData.location}
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             placeholder="Location"
             required
           />
-          <div className="input-guide">
-            Please enter the city and country where you currently reside.
-          </div>
+          {activeInput === "location" && (
+            <div className="input-guide">
+              Please enter the city and country where you currently reside.
+            </div>
+          )}
         </div>
         <div className="form-group">
           <FontAwesomeIcon icon={faLock} className="form-icon" />
@@ -84,13 +104,17 @@ const Guardian = () => {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             placeholder="Password"
             required
           />
-          <div className="input-guide">
-            Your password must be at least 8 characters long and include at
-            least one uppercase letter, one lowercase letter, and one number.
-          </div>
+          {activeInput === "password" && (
+            <div className="input-guide">
+              Your password must be at least 8 characters long and include at
+              least one uppercase letter, one lowercase letter, and one number.
+            </div>
+          )}
         </div>
         <div className="form-group">
           <FontAwesomeIcon icon={faEnvelope} className="form-icon" />
@@ -100,12 +124,16 @@ const Guardian = () => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             placeholder="Email"
             required
           />
-          <div className="input-guide">
-            Please enter a valid email address that you have access to.
-          </div>
+          {activeInput === "email" && (
+            <div className="input-guide">
+              Please enter a valid email address that you have access to.
+            </div>
+          )}
         </div>
         <div className="form-group">
           <FontAwesomeIcon icon={faPhoneAlt} className="form-icon" />
@@ -115,13 +143,17 @@ const Guardian = () => {
             name="emergency_contact"
             value={formData.emergency_contact}
             onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             placeholder="Emergency Contact"
             required
           />
-          <div className="input-guide">
-            Please enter a phone number where you can be reached in case of an
-            emergency.
-          </div>
+          {activeInput === "emergency_contact" && (
+            <div className="input-guide">
+              Please enter a phone number where you can be reached in case of an
+              emergency.
+            </div>
+          )}
         </div>
         {errors.general && (
           <div className="error-message">{errors.general}</div>
