@@ -57,22 +57,25 @@ const CaregiverSignupForm = () => {
     <div className="caregiver-signup-container">
       <div className="caregiver-signup-header">
         <h1>Become a Caregiver</h1>
-        <p>Join our network of dedicated caregivers and make a difference.</p>
+        <p>Join our network, make a difference.</p>
       </div>
       <form onSubmit={handleSubmit} className="caregiver-signup-form">
         <div className="form-group">
-          <FontAwesomeIcon icon={faUserNurse} className="form-icon" />
-          <input
-            type="text"
-            id="certification_id"
-            name="certification_id"
-            value={formData.certification_id}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Certification ID"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faUserNurse} className="form-icon" />
+            <input
+              type="text"
+              id="certification_id"
+              name="certification_id"
+              value={formData.certification_id}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Certification ID"
+              required
+            />
+          </div>
+
           {activeInput === "certification_id" && (
             <div className="input-guide">
               Please enter the unique identifier number for your caregiver
@@ -81,18 +84,20 @@ const CaregiverSignupForm = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faUserNurse} className="form-icon" />
-          <input
-            type="text"
-            id="fullname"
-            name="fullname"
-            value={formData.fullname}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Full Name"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faUserNurse} className="form-icon" />
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              value={formData.fullname}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Full Name"
+              required
+            />
+          </div>
           {activeInput === "fullname" && (
             <div className="input-guide">
               Please enter your full name as it appears on your caregiver
@@ -101,18 +106,20 @@ const CaregiverSignupForm = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="form-icon" />
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Location"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="form-icon" />
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Location"
+              required
+            />
+          </div>
           {activeInput === "location" && (
             <div className="input-guide">
               Please enter the city and country where you are based.
@@ -120,18 +127,20 @@ const CaregiverSignupForm = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faEnvelope} className="form-icon" />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Email"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faEnvelope} className="form-icon" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Email"
+              required
+            />
+          </div>
           {activeInput === "email" && (
             <div className="input-guide">
               Please enter a valid email address where you can be reached.
@@ -139,18 +148,20 @@ const CaregiverSignupForm = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faPhoneAlt} className="form-icon" />
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Phone Number"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faPhoneAlt} className="form-icon" />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Phone Number"
+              required
+            />
+          </div>
           {activeInput === "phone" && (
             <div className="input-guide">
               Please enter a phone number where you can be reached.
@@ -158,18 +169,20 @@ const CaregiverSignupForm = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faLock} className="form-icon" />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Password"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faLock} className="form-icon" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Password"
+              required
+            />
+          </div>
           {activeInput === "password" && (
             <div className="input-guide">
               Your password must be at least 8 characters long and include at
@@ -178,18 +191,20 @@ const CaregiverSignupForm = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faMoneyBillAlt} className="form-icon" />
-          <input
-            type="number"
-            id="fees"
-            name="fees"
-            value={formData.fees}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Hourly Fees"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faMoneyBillAlt} className="form-icon" />
+            <input
+              type="number"
+              id="fees"
+              name="fees"
+              value={formData.fees}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Hourly Fees"
+              required
+            />
+          </div>
           {activeInput === "fees" && (
             <div className="input-guide">
               Please enter your hourly rate for providing caregiver services.
