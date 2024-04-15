@@ -8,7 +8,7 @@ import {
   faEnvelope,
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import "./guardian.css"
+import "./guardian.css";
 
 const Guardian = () => {
   const [formData, setFormData] = useState({
@@ -58,18 +58,20 @@ const Guardian = () => {
       </div>
       <form onSubmit={handleSubmit} className="signup-form">
         <div className="form-group">
-          <FontAwesomeIcon icon={faUserCircle} className="form-icon" />
-          <input
-            type="text"
-            id="fullname"
-            name="fullname"
-            value={formData.fullname}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Full Name"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faUserCircle} className="form-icon" />
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              value={formData.fullname}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Full Name"
+              required
+            />
+          </div>
           {activeInput === "fullname" && (
             <div className="input-guide">
               Please enter your full name as it appears on your official
@@ -78,18 +80,20 @@ const Guardian = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="form-icon" />
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Location"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="form-icon" />
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Location"
+              required
+            />
+          </div>
           {activeInput === "location" && (
             <div className="input-guide">
               Please enter the city and country where you currently reside.
@@ -97,38 +101,43 @@ const Guardian = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faLock} className="form-icon" />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Password"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faLock} className="form-icon" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Password"
+              required
+            />
+          </div>
           {activeInput === "password" && (
             <div className="input-guide">
               Your password must be at least 8 characters long and include at
-              least one uppercase letter, one lowercase letter, and one number.
+              least one uppercase letter, one lowercase letter, one special
+              character (eg @,#), and one number.
             </div>
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faEnvelope} className="form-icon" />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Email"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faEnvelope} className="form-icon" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Email"
+              required
+            />
+          </div>
           {activeInput === "email" && (
             <div className="input-guide">
               Please enter a valid email address that you have access to.
@@ -136,18 +145,20 @@ const Guardian = () => {
           )}
         </div>
         <div className="form-group">
-          <FontAwesomeIcon icon={faPhoneAlt} className="form-icon" />
-          <input
-            type="tel"
-            id="emergency_contact"
-            name="emergency_contact"
-            value={formData.emergency_contact}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder="Emergency Contact"
-            required
-          />
+          <div className="input-group">
+            <FontAwesomeIcon icon={faPhoneAlt} className="form-icon" />
+            <input
+              type="tel"
+              id="emergency_contact"
+              name="emergency_contact"
+              value={formData.emergency_contact}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="Emergency Contact"
+              required
+            />
+          </div>
           {activeInput === "emergency_contact" && (
             <div className="input-guide">
               Please enter a phone number where you can be reached in case of an

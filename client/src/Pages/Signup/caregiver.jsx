@@ -186,7 +186,8 @@ const CaregiverSignupForm = () => {
           {activeInput === "password" && (
             <div className="input-guide">
               Your password must be at least 8 characters long and include at
-              least one uppercase letter, one lowercase letter, and one number.
+              least one uppercase letter, one lowercase letter,one special
+              character(eg @, #) and one number.
             </div>
           )}
         </div>
