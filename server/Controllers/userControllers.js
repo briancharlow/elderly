@@ -25,9 +25,13 @@ async function registerUser(req, res) {
 
 
             if (result.recordset && result.recordset.length > 0 && result.recordset[0].success === 1) {
-                res.status(200).send("User registered successfully!");
+                res.status(200).json({
+                    success: true,
+                    message: "User registered successfully!"
+                }
+                );
             } else {
-                res.status(500).send("User registration failed. Please try again later.");
+                res.status(409).send("User registration failed. Please try again later.");
             }
         }
     } catch (error) {

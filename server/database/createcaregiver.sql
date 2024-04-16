@@ -1,11 +1,12 @@
-CREATE PROCEDURE sp_CreateCaregiver
+CREATE OR ALTER PROCEDURE sp_CreateCaregiver
     @fullname VARCHAR(255),
     @location VARCHAR(255),
     @email VARCHAR(255),
     @phone_number VARCHAR(20),
     @description VARCHAR(255),
     @ratings INT,
-    @status VARCHAR(50)
+    @status VARCHAR(50),
+	@fees INT
 AS
 BEGIN
     DECLARE @newCaregiverID UNIQUEIDENTIFIER
@@ -17,9 +18,9 @@ BEGIN
     DECLARE @last_seen DATETIME
     SET @last_seen = GETDATE()
 
-    INSERT INTO Caregivers (id, fullname, location, email, phone_number, description, created_at, last_seen, ratings, status)
+    INSERT INTO Caregivers (id, fullname, location, email, phone_number, description, created_at, last_seen, ratings, status, fees)
     VALUES (@newCaregiverID, @fullname, @location, @email,
-            @phone_number, @description, @created_at, @last_seen, @ratings, @status)
+            @phone_number, @description, @created_at, @last_seen, @ratings, @status, @fees)
 END;
 
 

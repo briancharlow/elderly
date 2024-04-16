@@ -8,6 +8,7 @@ import {
   faEnvelope,
   faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 import "./guardian.css";
 
 const Guardian = () => {
@@ -21,6 +22,7 @@ const Guardian = () => {
 
   const [errors, setErrors] = useState({});
   const [activeInput, setActiveInput] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,11 +40,21 @@ const Guardian = () => {
     e.preventDefault();
 
     try {
+      console.log("foo");
       const response = await axios.post(
         "http://localhost:5000/register",
         formData
       );
+      console.log("bar");
       console.log(response.data);
+      if (response.data.success) {
+        alert(
+          "Registration successful. Please login with your new credentials to access the system."
+        );
+        navigate("/login");
+      } else {
+        alert("Registration failed. Please try again.");
+      }
       // Handle successful registration
     } catch (error) {
       console.error(error);

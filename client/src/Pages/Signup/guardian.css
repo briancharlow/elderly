@@ -3,14 +3,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   background-image: linear-gradient(to bottom right, #007bff, #00c851);
   color: #fff;
+  padding: 2rem;
 }
 
 .signup-header {
   text-align: center;
-  margin-bottom: 2rem;
+
   padding: 2rem;
 }
 
