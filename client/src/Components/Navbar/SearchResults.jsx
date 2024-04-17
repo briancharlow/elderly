@@ -1,30 +1,41 @@
-// SearchResults.js
 import React from "react";
-import { FaUser } from "react-icons/fa";
-import Avatar from "@material-ui/core/Avatar";
+import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "./search.css";
 
 const SearchResults = ({ searchTerm, searchResults }) => {
+  const navigate = useNavigate();
+
+  const handleViewCaregiver = (caregiverId) => {
+    navigate(`/home/caregiver/${caregiverId}`);
+  };
+
   return (
     <div className="search-results">
       {searchResults.length === 0 && searchTerm.trim() !== "" ? (
         <div className="no-results">No results found for "{searchTerm}"</div>
       ) : (
-        searchResults.map((result) => (
-          <div className="search-result" key={result.id}>
-            <Avatar
-              // Use default avatar if profilePicture is not available
-              // alt=""
-              className="avatar"
-            />
-            <div className="user-info">
-              <span className="username">{result.fullname}</span>
-              {/* You can display additional user information here */}
+        searchResults
+          .sort((a, b) => b.ratings - a.ratings) // Sort by ratings in descending order
+          .map((result) => (
+            <div
+              className="search-result"
+              key={result.id}
+              onClick={() => handleViewCaregiver(result.id)}
+            >
+              <div className="caregiver-info">
+                <h3>{result.fullname}</h3>
+                <div className="caregiver-location">
+                  <FaMapMarkerAlt />
+                  <p>{result.location}</p>
+                </div>
+              </div>
+              <div className="caregiver-rating">
+                <FaStar />
+                <span>{result.ratings}</span>
+              </div>
             </div>
-            {/* Add buttons/icons for actions like adding or removing users */}
-            <FaUser className="add-user-icon" /> {/* Example: Add user */}
-            {/* You can add more icons/buttons for actions */}
-          </div>
-        ))
+          ))
       )}
     </div>
   );

@@ -55,90 +55,97 @@ const CaregiverSignupForm = () => {
     <div className="create-caregiver-form">
       <h2>Create Caregiver</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faUserNurse} /> Certification ID
-          </label>
-          <input
-            type="text"
-            name="certification_id"
-            value={formData.certification_id}
-            onChange={handleChange}
-            required
-          />
+        <div className="requirements">
+          <div className="left">
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faUserNurse} /> Certification ID
+              </label>
+              <input
+                type="text"
+                name="certification_id"
+                value={formData.certification_id}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faUserNurse} /> Full Name
+              </label>
+              <input
+                type="text"
+                name="fullname"
+                value={formData.fullname}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faMapMarkerAlt} /> Location
+              </label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faEnvelope} /> Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="right">
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faPhoneAlt} /> Phone
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faLock} /> Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                <FontAwesomeIcon icon={faMoneyBillAlt} /> Fees
+              </label>
+              <input
+                type="text"
+                name="fees"
+                value={formData.fees}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faUserNurse} /> Full Name
-          </label>
-          <input
-            type="text"
-            name="fullname"
-            value={formData.fullname}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faMapMarkerAlt} /> Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faEnvelope} /> Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faPhoneAlt} /> Phone
-          </label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faLock} /> Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>
-            <FontAwesomeIcon icon={faMoneyBillAlt} /> Fees
-          </label>
-          <input
-            type="text"
-            name="fees"
-            value={formData.fees}
-            onChange={handleChange}
-            required
-          />
-        </div>
+
         <button type="submit">Create Caregiver</button>
       </form>
     </div>

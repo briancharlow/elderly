@@ -1,17 +1,18 @@
-// CaregiversList.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Avatar } from "@material-ui/core";
-import "./center.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMapMarkerAlt,
+  faStar,
+  faUserGraduate,
+  faCertificate,
+  faDollarSign,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import "./center.css";
 
 const CaregiversList = () => {
   const navigate = useNavigate();
-
-  const handleViewMore = (caregiverId) => {
-    navigate(`/home/caregiver/${caregiverId}`);
-  };
-
   const [caregivers, setCaregivers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,11 +22,10 @@ const CaregiversList = () => {
         const response = await axios.get(
           "http://localhost:5000/getcaregivers",
           {
-            withCredentials: true, // Include credentials in the request
+            withCredentials: true,
           }
         );
         const data = response.data;
-        console.log(data.caregivers);
         if (data.success) {
           setCaregivers(data.caregivers);
         } else {
@@ -37,39 +37,68 @@ const CaregiversList = () => {
         setLoading(false);
       }
     };
-
     fetchCaregivers();
   }, []);
+
+  const handleViewMore = (caregiverId) => {
+    navigate(`/home/caregiver/${caregiverId}`);
+  };
 
   return (
     <div className="caregivers-list">
       {loading ? (
         <p>Loading caregivers...</p>
       ) : (
-        <>
+        <div className="caregiver-cards">
           {caregivers.map((caregiver) => (
-            <div className="caregiver" key={caregiver.id}>
-              <div className="profile">
-                <Avatar> {caregiver.fullname[0].toUpperCase()} </Avatar>
-                <div className="caregiver-details">
+            <div className="caregiver-card" key={caregiver.id}>
+              <div className="caregiver-profile">
+                <div className="caregiver-avatar">
+                  {caregiver.fullname.charAt(0).toUpperCase()}
+                </div>
+                <div className="caregiver-info">
                   <h3>{caregiver.fullname}</h3>
-                  <p>{caregiver.location}</p>
+                  <div className="caregiver-location">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />
+                    <p>{caregiver.location}</p>
+                  </div>
                 </div>
               </div>
-              <div className="qualifications">
-                <strong>Specialization: {caregiver.qualifications}</strong>
-                <p>{caregiver.description}</p>
+              <div className="caregiver-details">
+                <div className="caregiver-detail">
+                  <FontAwesomeIcon icon={faUserGraduate} />
+                  <p>
+                    <strong>Education:</strong> {caregiver.education}
+                  </p>
+                </div>
+                <div className="caregiver-detail">
+                  <FontAwesomeIcon icon={faCertificate} />
+                  <p>
+                    <strong>Certification:</strong> {caregiver.qualifications}
+                  </p>
+                </div>
+                <div className="caregiver-detail">
+                  <FontAwesomeIcon icon={faDollarSign} />
+                  <p>
+                    <strong>Fees:</strong> ${caregiver.fees}
+                  </p>
+                </div>
               </div>
-              <hr />
               <div className="caregiver-actions">
-                <span>Rating: {caregiver.ratings}</span>
-                <button onClick={() => handleViewMore(caregiver.id)}>
+                <div className="caregiver-rating">
+                  <FontAwesomeIcon icon={faStar} />
+                  <span>{caregiver.ratings}</span>
+                </div>
+                <button
+                  className="view-more-btn"
+                  onClick={() => handleViewMore(caregiver.id)}
+                >
                   View more
                 </button>
               </div>
             </div>
           ))}
-        </>
+        </div>
       )}
     </div>
   );

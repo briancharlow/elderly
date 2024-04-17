@@ -2,69 +2,117 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 3rem;
-  width: 90%;
-  height: 100%;
-  overflow: auto;
-  padding: 0;
-  list-style: none;
+  margin: 2rem 0;
 }
-.caregiver {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 60rem;
-  height: 100%;
-  overflow: auto;
-  padding: 1rem;
-  background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-.profile {
-  display: flex;
-  gap: 1rem;
+
+.caregiver-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  grid-gap: 2rem;
   width: 100%;
 }
-.caregiver-details {
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem;
+
+.caregiver-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
 }
-.caregiver-details h3 {
+
+.caregiver-card:hover {
+  transform: translateY(-5px);
+}
+
+.caregiver-profile {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #f5f5f5;
+}
+
+.caregiver-avatar {
+  width: 60px;
+  height: 60px;
+  background-color: #4caf50;
+  color: #fff;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #000000;
-}
-.caregiver-details p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #1028c6;
-}
-.qualifications {
+  font-weight: bold;
   display: flex;
-  flex-direction: column;
-  margin-left: 1rem;
-  gap: 1rem;
-  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 1rem;
 }
+
+.caregiver-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.caregiver-location {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.caregiver-location svg {
+  margin-right: 0.5rem;
+}
+
+.caregiver-details {
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.caregiver-detail {
+  display: flex;
+
+  margin-bottom: 1rem;
+}
+
+.caregiver-detail svg {
+  margin-right: 0.5rem;
+  color: #4caf50;
+}
+
 .caregiver-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #f0f0f0;
 }
-.caregiver-actions button {
-  padding: 0.5rem 1rem;
+
+.caregiver-rating {
+  display: flex;
+  align-items: center;
+  color: #ffa000;
+  font-size: 0.9rem;
+}
+
+.caregiver-rating svg {
+  margin-right: 0.5rem;
+}
+
+.view-more-btn {
+  background-color: #4caf50;
+  color: #fff;
   border: none;
-  border-radius: 5px;
-  background-color: #512da8;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 40%;
 }
-.caregiver-actions button:hover {
-  background-color: #5c6bc0;
+
+.view-more-btn:hover {
+  background-color: #43a047;
 }

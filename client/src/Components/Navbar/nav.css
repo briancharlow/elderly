@@ -171,27 +171,3 @@
   font-weight: bold;
   margin-right: 10px;
 }
-
-.follow-button,
-.unfollow-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #555555;
-  display: flex;
-  align-items: center;
-}
-
-.follow-button:hover,
-.unfollow-button:hover {
-  color: #1a73e8;
-}
-
-/* Additional styles for the follow and unfollow buttons */
-.follow-button {
-  margin-left: auto;
-}
-
-.unfollow-button {
-  color: #f44336;
-}
