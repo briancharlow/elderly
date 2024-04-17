@@ -9,7 +9,8 @@ import {
   faPhoneAlt,
   faMoneyBillAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import "./signup.css";
+import "./signup.css"; // Import the CSS stylesheet
+import { useNavigate } from "react-router-dom";
 
 const CaregiverSignupForm = () => {
   const [formData, setFormData] = useState({
@@ -19,205 +20,126 @@ const CaregiverSignupForm = () => {
     email: "",
     phone: "",
     password: "",
-    fees: "",
+    fees: "", // Include fees in formData state
   });
 
-  const [errors, setErrors] = useState({});
-  const [activeInput, setActiveInput] = useState("");
+  const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleInputFocus = (e) => {
-    setActiveInput(e.target.name);
-  };
-
-  const handleInputBlur = () => {
-    setActiveInput("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         "http://localhost:5000/createcaregiver",
         formData
       );
       console.log(response.data);
-      // Handle successful caregiver creation
+      if (response.data.success) {
+        alert("Caregiver created successfully!");
+        alert("Please login with your new credentials to continue");
+        navigate("/login");
+      } else {
+        alert("Caregiver creation failed. Please try again later.");
+      }
     } catch (error) {
-      console.error(error);
-      setErrors({ general: error.response.data.message });
+      console.error("Error creating caregiver:", error);
+      alert("Internal Server Error. Please try again later.");
     }
   };
 
   return (
-    <div className="caregiver-signup-container">
-      <div className="caregiver-signup-header">
-        <h1>Become a Caregiver</h1>
-        <p>Join our network, make a difference.</p>
-      </div>
-      <form onSubmit={handleSubmit} className="caregiver-signup-form">
+    <div className="create-caregiver-form">
+      <h2>Create Caregiver</h2>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faUserNurse} className="form-icon" />
-            <input
-              type="text"
-              id="certification_id"
-              name="certification_id"
-              value={formData.certification_id}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Certification ID"
-              required
-            />
-          </div>
-
-          {activeInput === "certification_id" && (
-            <div className="input-guide">
-              Please enter the unique identifier number for your caregiver
-              certification.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faUserNurse} /> Certification ID
+          </label>
+          <input
+            type="text"
+            name="certification_id"
+            value={formData.certification_id}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faUserNurse} className="form-icon" />
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              value={formData.fullname}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Full Name"
-              required
-            />
-          </div>
-          {activeInput === "fullname" && (
-            <div className="input-guide">
-              Please enter your full name as it appears on your caregiver
-              certification.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faUserNurse} /> Full Name
+          </label>
+          <input
+            type="text"
+            name="fullname"
+            value={formData.fullname}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faMapMarkerAlt} className="form-icon" />
-            <input
-              type="text"
-              id="location"
-              name="location"
-              value={formData.location}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Location"
-              required
-            />
-          </div>
-          {activeInput === "location" && (
-            <div className="input-guide">
-              Please enter the city and country where you are based.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faMapMarkerAlt} /> Location
+          </label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faEnvelope} className="form-icon" />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Email"
-              required
-            />
-          </div>
-          {activeInput === "email" && (
-            <div className="input-guide">
-              Please enter a valid email address where you can be reached.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faEnvelope} /> Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faPhoneAlt} className="form-icon" />
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Phone Number"
-              required
-            />
-          </div>
-          {activeInput === "phone" && (
-            <div className="input-guide">
-              Please enter a phone number where you can be reached.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faPhoneAlt} /> Phone
+          </label>
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faLock} className="form-icon" />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Password"
-              required
-            />
-          </div>
-          {activeInput === "password" && (
-            <div className="input-guide">
-              Your password must be at least 8 characters long and include at
-              least one uppercase letter, one lowercase letter,one special
-              character(eg @, #) and one number.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faLock} /> Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <div className="input-group">
-            <FontAwesomeIcon icon={faMoneyBillAlt} className="form-icon" />
-            <input
-              type="number"
-              id="fees"
-              name="fees"
-              value={formData.fees}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              placeholder="Hourly Fees"
-              required
-            />
-          </div>
-          {activeInput === "fees" && (
-            <div className="input-guide">
-              Please enter your hourly rate for providing caregiver services.
-            </div>
-          )}
+          <label>
+            <FontAwesomeIcon icon={faMoneyBillAlt} /> Fees
+          </label>
+          <input
+            type="text"
+            name="fees"
+            value={formData.fees}
+            onChange={handleChange}
+            required
+          />
         </div>
-        {errors.general && (
-          <div className="error-message">{errors.general}</div>
-        )}
-        <button type="submit" className="submit-button">
-          Sign Up as Caregiver
-        </button>
+        <button type="submit">Create Caregiver</button>
       </form>
     </div>
   );

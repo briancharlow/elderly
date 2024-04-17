@@ -1,91 +1,67 @@
-.caregiver-signup-container {
-  display: flex;
-  padding: 2rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  background-image: linear-gradient(to bottom right, #9b59b6, #8e44ad);
-  color: #fff;
-  margin-top: 2rem;
+.create-caregiver-form {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.caregiver-signup-header {
+.create-caregiver-form h2 {
   text-align: center;
-  padding: 2rem;
-}
-
-.caregiver-signup-header h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.caregiver-signup-header p {
-  font-size: 1.2rem;
-}
-
-.caregiver-signup-form {
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 500px;
+  color: #333;
 }
 
 .form-group {
-  position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
-.form-icon {
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  color: #495057;
-  font-size: 1.2rem;
+label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 }
 
-input {
+label > svg {
+  margin-right: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  border: none;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 1rem;
-  color: #495057;
-  transition: background-color 0.3s;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-input:focus {
-  outline: none;
-  background-color: #fff;
-}
-
-.input-guide {
-  font-size: 0.875rem;
-  color: #495057;
-  margin-top: 0.5rem;
-}
-
-.error-message {
-  color: #ff6b6b;
-  margin-bottom: 1rem;
-}
-
-.submit-button {
+button {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #9b59b6;
+  padding: 12px;
+  font-size: 16px;
   color: #fff;
+  background-color: #007bff;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
-  background-color: #8e44ad;
+button > svg {
+  margin-right: 8px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .create-caregiver-form {
+    width: 90%;
+  }
 }

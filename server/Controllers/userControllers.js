@@ -25,13 +25,16 @@ async function registerUser(req, res) {
 
 
             if (result.recordset && result.recordset.length > 0 && result.recordset[0].success === 1) {
-                res.status(200).json({
+                res.status(201).json({
                     success: true,
                     message: "User registered successfully!"
                 }
                 );
             } else {
-                res.status(409).send("User registration failed. Please try again later.");
+                res.status(200).json({
+                    success: false,
+                    message: "User registration failed. Please try again later."
+                });
             }
         }
     } catch (error) {
@@ -67,19 +70,20 @@ async function createCaregiver(req, res) {
                     .input("fullname", caregiver.fullname).input("location", caregiver.location)
                     .input("email", caregiver.email).input("phone_number", caregiver.phone)
                     .input("description", caregiver.description)
+                    .input("fees", caregiver.fees)
                     .input("password", hashedPassword)
                     .input("qualifications", qualifications)
                     .input("date_of_certification", date_of_certification)
-                    .input("education", institution_of_certification)
-                    .input("fees", fees)
+                    .input("institution", institution_of_certification)
+
                     .execute("sp_CreateCaregiver");
 
                 console.log(result) // Check the number of rows affected to determine success 
                 if (result.rowsAffected && result.rowsAffected[0] > 0) {
-                    res.status(200).json({ success: true, message: "Caregiver created successfully!" });
+                    res.status(201).json({ success: true, message: "Caregiver created successfully!" });
 
                 } else { // Handle specific error cases, if necessary
-                    res.status(500).json({ success: false, message: "Caregiver creation failed. Please try again later." });
+                    res.status(200).json({ success: false, message: "Caregiver creation failed. Please try again later." });
                 }
             }
         }
